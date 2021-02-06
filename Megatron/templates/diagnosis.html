@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}主页{% endblock %}
+
+{% block styleExpands %}
+
+{% endblock %}
+
+
+{% block contents %}
+    <br><br><br>
+
+    <div class="container">
+        <div class="row">
+             <div class="col-md-3">
+                 <ul class="list-group">
+                    <li class="list-group-item list-group-item-primary">正在</li>
+                    <li class="list-group-item list-group-item-secondary">1</li>
+                    <li class="list-group-item list-group-item-success">排队</li>
+                    <li class="list-group-item list-group-item-danger">3</li>
+                    <li class="list-group-item list-group-item-warning">4</li>
+
+                    <li class="list-group-item list-group-item-light">5</li>
+                    <li class="list-group-item list-group-item-dark">6</li>
+                 </ul>
+             </div>
+
+                <div class="col-md-9">
+                    <div align="center">病历单</div>
+                    <div align="right">
+                        <button type="button" class="btn btn-primary">Primary</button>
+                        <button type="button" class="btn btn-secondary">Secondary</button>
+                        <button type="button" class="btn btn-success">Success</button>
+                    </div>
+
+                </div>
+
+        </div>
+    </div>
+{% endblock %}

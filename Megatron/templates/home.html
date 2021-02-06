@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}主页{% endblock %}
+
+{% block styleExpands %}
+    .logo_media{text-align:center}
+{% endblock %}
+
+
+{% block contents %}
+    <br><br><br><br><br><br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="logo_media">
+                    <img src="/media/logo.jpg" />
+                </div>
+
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="form-control input-lg"><span class="input-group-addon btn btn-primary">搜索</span>
+                </div>
+                <br>
+                <br>
+
+                <div class="hot_search">
+
+                    <div>热门搜索</div>   <!-- 字体设置 -->
+
+                    <div class="row">
+
+                        <div class="col-md-6">123222222222222222222222222222</div>
+                        <div class="col-md-6">123222222222222222222222222222</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+

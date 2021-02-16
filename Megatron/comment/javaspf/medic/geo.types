@@ -1,0 +1,12 @@
+(
+
+(i e)	    // integer / number...
+(pat e)     // patient
+(ill e)     // illness
+(dp e)      // department
+(treat e)   // treatment
+(res e)     // result
+(gen e)     // gender
+(age e)		// age
+
+)

@@ -1,0 +1,13 @@
+(
+
+the:<<e,t>,e>
+exists:<<e,t>,t>
+patient:<pat,t>
+visit:<dp,<pat,t>>
+illness:<ill,<pat,t>>
+treatment:<treat,<pat,t>>
+result:<res,<pat,t>>
+gender:<gen,<pat,t>>
+age:<age,<pat,t>>
+
+)

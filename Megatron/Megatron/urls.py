@@ -23,7 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('diagnosis', diagnosis, name='diagnosis'),
+    path('Case/', include('medicalCase.urls')),
     path('search', search, name='search'),
+    path('comment/', include('comment.urls')),
     path('user/', include('user.urls'))
 ]
 

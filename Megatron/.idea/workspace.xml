@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9334c845-0667-484c-8954-5690126c4fe1" name="Default Changelist" comment="" />
+    <list default="true" id="9334c845-0667-484c-8954-5690126c4fe1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/Megatron1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medicalCase/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medicalCase/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medicalCase/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medicalCase/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medicalCase/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medicalCase/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medicalCase/templates/medicalCase/Case.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medicalCase/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medicalCase/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medicalCase/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Megatron/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Megatron/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Megatron/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Megatron/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Megatron/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Megatron/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/t/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/t/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/t/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/t/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,22 +31,30 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1njR95KqBMwqRD7n3yMGRyC8UZK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BS4/Apprenticeship-system/ApprenticeshipSystem" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -91,24 +120,30 @@
       <workItem from="1612527296187" duration="1236000" />
       <workItem from="1612596114467" duration="479000" />
       <workItem from="1612600063048" duration="10140000" />
+      <workItem from="1613462830102" duration="1890000" />
+      <workItem from="1613465982095" duration="4853000" />
+      <workItem from="1613482196058" duration="3004000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1612600185793">
+    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1613482173909">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1612600185793" />
+    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1613482173909" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1611901483829">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1611901483829" />
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1612600118930">
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1613465981939">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1612600118930" />
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1613465981939" />
   </component>
 </project>

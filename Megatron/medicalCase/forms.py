@@ -12,3 +12,4 @@ class createCaseForm(forms.Form):
     solution = forms.CharField(label='解决方案',
                                max_length=30, min_length=1,
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
+    # solution = forms.Textarea()

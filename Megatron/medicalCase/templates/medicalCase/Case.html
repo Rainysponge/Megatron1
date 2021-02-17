@@ -28,26 +28,34 @@
                     <div align="center">病历单</div>
 
                     <div class="input-group">
-                        <form action="#" method="POST" style="overflow:hidden">
+                        <form action="{% url 'case_change' %}" method="POST" style="overflow:hidden">
 
                             {% csrf_token %}
                             {% for field in case_form %}
                                 <lable for="{{ field.id_for_label }}">{{ field.label }}</lable>
                                 {{ field }}
                             {% endfor %}
-
+                            <div align="right"> <input type="submit" value="保存" class="btn btn-primary"></div>
                             {#<input type="text" class="form-control input-lg"><span class="input-group-addon btn btn-primary">搜索</span>#}
                         </form>
 
                 </div>
-                    <div align="right">
-                        <button type="button" class="btn btn-primary">Primary</button>
-                        <button type="button" class="btn btn-secondary">Secondary</button>
-                        <button type="button" class="btn btn-success">Success</button>
-                    </div>
+{#                    <div align="right">#}
+{#                        <button type="button" class="btn btn-primary">Primary</button>#}
+{#                        <button type="button" class="btn btn-secondary">Secondary</button>#}
+{#                        <button type="button" class="btn btn-success">Success</button>#}
+{#                    </div>#}
 
                 </div>
 
         </div>
     </div>
+
+
+    <script>
+        if ('{{ patient_id }}'){
+            console.log('{{ patient_id }}');
+        }
+
+    </script>
 {% endblock %}

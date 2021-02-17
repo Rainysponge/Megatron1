@@ -3,7 +3,7 @@
 
 
 {% block contents %}
-    <br><br>
+    <br><br><br><br>
 
     <div class="container">
         <div class="row">
@@ -16,12 +16,12 @@
 
                            <div class="input-group">
                               <div class="input-group-prepend">
-                                  {% if field.label == "用户名" %}
-                                      <span class="input-group-text" ><i class="fa fa-user-circle-o" ></i></span>
-                                  {% endif %}
-                                  {% if field.label == "密码" %}
-                                      <span class="input-group-text" ><i class="fa fa-key" ></i></span>
-                                  {% endif %}
+{#                                  {% if field.label == "用户名" %}#}
+{#                                      <span class="input-group-text" ><i class="fa fa-user-circle-o" ></i></span>#}
+{#                                  {% endif %}#}
+{#                                  {% if field.label == "密码" %}#}
+{#                                      <span class="input-group-text" ><i class="fa fa-key" ></i></span>#}
+{#                                  {% endif %}#}
                                     <div class="col-md-12">
                                         {{ field }}
                                     </div>

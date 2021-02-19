@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import auth
+from django.urls import reverse
 from django.contrib.auth.models import User
 from .forms import LoginFrom, RegForm
 from .models import Profile, Doctor, Patient
@@ -62,3 +63,8 @@ def register(request):
     context['reg_form'] = reg_form
     context['form_title'] = '注册'
     return render(request, 'user/register.html', context)
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect(request.GET.get('from', reverse('home')))

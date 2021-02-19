@@ -46,48 +46,40 @@
             </li>
 
             </ul>
-{#            <ul class="nav navbar-nav">#}
-{#            {% if not user.is_authenticated or not user %}#}
-{#                    <li class="nav-item">#}
-{#                    <a class="nav-link" href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item">#}
-{#                    <a class="nav-link" href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>#}
-{#                    </li>#}
-{#            {% else %}#}
-{#                      <li class="nav-item dropdown">#}
-{#                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-{#                          {{ user.username }}#}
-{#                        </a>#}
-{#                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
-{#                            {% block Active %}{% endblock %}#}
-{##}
-{#                            <a class="dropdown-item" href="{% url 'changeProfileInfo' user.Profile.pk %}">修改个人基本信息</a>#}
-{##}
-{#                            <a class="dropdown-item" href="{% url 'changeTSInfo' user.Profile.pk %}">修改老师基本信息</a>#}
-{##}
-{#                            <a class="dropdown-item" href="{% url 'changeTS_student_Info' user.Profile.pk %}">修改学生基本信息</a>#}
-{##}
-{#                            <a class="dropdown-item" href="{% url 'teacher_info' %}">个人中心</a>#}
-{##}
-{#                            <a class="dropdown-item" href="{% url 'Apprentice_detail' %}">拜师请求<span class="sr-only">(current)</span></a>#}
-{#                            {% if user.is_staff %}#}
-{#                            <a id="goToAdmin" class="dropdown-item" href="" >后台数据管理</a>#}
-{#                                <script>#}
-{#                                    const test_base = window.location.href;#}
-{#                                    const e_base = test_base.split('/');#}
-{#                                    const homeUrl = e_base[2];#}
-{#                                    const item = 'http://'+homeUrl+'/admin';#}
-{#                                    document.getElementById('goToAdmin').href = item;#}
-{#                                </script>#}
-{#                            {% endif %}#}
-{#                            <a class="dropdown-item" href="{% url 'logout' %}">注销</a>#}
-{##}
-{#                        </div>#}
-{#                  </li>#}
-{#            {% endif %}#}
-{##}
-{#            </ul>#}
+            <ul class="nav navbar-nav">
+            {% if not user.is_authenticated or not user %}
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>
+                    </li>
+            {% else %}
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{ user.username }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% block Active %}{% endblock %}
+
+
+                            {% if user.is_staff %}
+                            <a id="goToAdmin" class="dropdown-item" href="" >后台数据管理</a>
+                                <script>
+                                    const test_base = window.location.href;
+                                    const e_base = test_base.split('/');
+                                    const homeUrl = e_base[2];
+                                    const item = 'http://'+homeUrl+'/admin';
+                                    document.getElementById('goToAdmin').href = item;
+                                </script>
+                            {% endif %}
+                            <a class="dropdown-item" href="{% url 'logout' %}">注销</a>
+
+                        </div>
+                  </li>
+            {% endif %}
+
+            </ul>
         {% csrf_token %}
 {#            <form class="form-inline my-2 my-lg-0" action="#">#}
 {#                <div class="form-group">#}

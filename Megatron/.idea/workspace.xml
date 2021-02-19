@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9334c845-0667-484c-8954-5690126c4fe1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/medicalCase/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user/migrations/0002_auto_20210217_2115.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user/migrations/0003_auto_20210217_2204.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user/migrations/0004_auto_20210217_2223.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/medicalCase/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/medicalCase/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/medicalCase/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/medicalCase/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/medicalCase/templates/medicalCase/Case.html" beforeDir="false" afterPath="$PROJECT_DIR$/medicalCase/templates/medicalCase/Case.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/medicalCase/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/medicalCase/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -120,6 +109,8 @@
       <workItem from="1613465982095" duration="4853000" />
       <workItem from="1613482196058" duration="3004000" />
       <workItem from="1613546497335" duration="7623000" />
+      <workItem from="1613634074269" duration="5528000" />
+      <workItem from="1613715542347" duration="8000" />
     </task>
     <servers />
   </component>

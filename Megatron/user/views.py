@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from .forms import LoginFrom, RegForm
 from .models import Profile, Doctor, Patient
 
-
 # Create your views here.
 
 

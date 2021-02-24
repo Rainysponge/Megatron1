@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9334c845-0667-484c-8954-5690126c4fe1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/admin/base_site.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Megatron/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Megatron/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +42,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="D:/bs2/DBMS-homework/pos_sysrtem" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -111,6 +114,9 @@
       <workItem from="1613546497335" duration="7623000" />
       <workItem from="1613634074269" duration="5528000" />
       <workItem from="1613715542347" duration="8000" />
+      <workItem from="1614065929215" duration="1886000" />
+      <workItem from="1614072443586" duration="595000" />
+      <workItem from="1614153778264" duration="2884000" />
     </task>
     <servers />
   </component>
@@ -121,17 +127,17 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1613482173909">
+    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1614155765388">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1613482173909" />
+    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1614155765388" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1611901483829">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1611901483829" />
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1613465981939">
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1614153784303">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1613465981939" />
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1614153784303" />
   </component>
 </project>

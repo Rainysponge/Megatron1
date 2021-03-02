@@ -10,12 +10,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-
-                <div class="input-group">
-                    <img src="/media/logo.jpg" width="100" height="25"/>
-
-                    <input type="text" class="form-control input-lg"><span class="input-group-addon btn btn-primary">搜索</span>
+                <div class="row">
+                    <div class="col-md-2">
+                         <img id="search_logo" src="/media/logo.jpg"/>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-lg"><span class="input-group-addon btn btn-primary">搜索</span>
+                        </div>
+                    </div>
                 </div>
+
+
 
                 <br>
 
@@ -57,4 +63,8 @@
 
 
     </div>
+    <style>
+        #search_logo{width:100px; height:40px}
+
+    </style>
 {% endblock %}

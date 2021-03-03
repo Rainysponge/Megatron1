@@ -15,4 +15,7 @@ from ckeditor.widgets import CKEditorWidget
 
 class Search_Comment(forms.Form):
     text = forms.CharField(widget=forms.widgets.Input(attrs={
-        'class': 'form-control input-lg', 'style': 'width:700px'}))
+        'class': 'form-control input-lg', 'style': 'width:600px'}))
+
+
+

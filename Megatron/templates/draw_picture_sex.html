@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title %}绘图{% endblock %}
+
+{% block styleExpands %}
+
+{% endblock %}
+
+
+{% block contents %}
+    <br><br><br>
+
+    <div class="container">
+        <div class="row">
+             <div class="list-group">
+                  <a href="{% url 'draw_picture' age_data1 age_data2 age_data3 age_data4 date_data1 date_data2 date_data3 date_data4 date_data5 date_data6 sex_data1 sex_data2 %}" class="list-group-item list-group-item-action">年龄分布图</a>
+                  <a href="{% url 'draw_picture_trend' age_data1 age_data2 age_data3 age_data4 date_data1 date_data2 date_data3 date_data4 date_data5 date_data6 sex_data1 sex_data2%}" class="list-group-item list-group-item-action list-group-item-primary">半年趋势图</a>
+                  <a href="{% url 'draw_picture_sex' age_data1 age_data2 age_data3 age_data4 date_data1 date_data2 date_data3 date_data4 date_data5 date_data6 sex_data1 sex_data2 %}" class="list-group-item list-group-item-action list-group-item-primary">性别分布图</a>
+            </div>
+
+                <div class="col-md-9">
+                        <div id="main" style="width: 1000px;height:600px;"></div>
+
+
+                        <script type="text/javascript">
+
+                            var chartDom = document.getElementById('main');
+                            var myChart = echarts.init(chartDom);
+                            var option;
+
+                            option = {
+                                backgroundColor: '#2c343c',
+
+                                title: {
+                                    text: 'Customized Pie',
+                                    left: 'center',
+                                    top: 20,
+                                    textStyle: {
+                                        color: '#ccc'
+                                    }
+                                },
+
+                                tooltip: {
+                                    trigger: 'item'
+                                },
+
+                                visualMap: {
+                                    show: false,
+                                    min: 80,
+                                    max: 600,
+                                    inRange: {
+                                        colorLightness: [0, 1]
+                                    }
+                                },
+                                series: [
+                                    {
+                                        name: '性别',
+                                        type: 'pie',
+                                        radius: '55%',
+                                        center: ['50%', '50%'],
+                                        data: [
+                                            {value: {{sex_data1}}, name: '男'},
+                                            {value: {{sex_data2}}, name: '女'},
+                                        ].sort(function (a, b) { return a.value - b.value; }),
+                                        roseType: 'radius',
+                                        label: {
+                                            color: 'rgba(255, 255, 255, 0.3)'
+                                        },
+                                        labelLine: {
+                                            lineStyle: {
+                                                color: 'rgba(255, 255, 255, 0.3)'
+                                            },
+                                            smooth: 0.2,
+                                            length: 10,
+                                            length2: 20
+                                        },
+                                        itemStyle: {
+                                            color: '#c23531',
+                                            shadowBlur: 200,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        },
+
+                                        animationType: 'scale',
+                                        animationEasing: 'elasticOut',
+                                        animationDelay: function (idx) {
+                                            return Math.random() * 200;
+                                        }
+                                    }
+                                ]
+                            };
+
+                            option && myChart.setOption(option);
+                    </script>
+                </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}绘图{% endblock %}
+
+{% block styleExpands %}
+
+{% endblock %}
+
+
+{% block contents %}
+    <br><br><br>
+
+    <div class="container">
+        <div class="row">
+             <div class="list-group">
+                  <a href="{% url 'draw_picture' age_data1 age_data2 age_data3 age_data4 date_data1 date_data2 date_data3 date_data4 date_data5 date_data6 sex_data1 sex_data2%}" class="list-group-item list-group-item-action">年龄分布图</a>
+                  <a href="{% url 'draw_picture_trend' age_data1 age_data2 age_data3 age_data4 date_data1 date_data2 date_data3 date_data4 date_data5 date_data6 sex_data1 sex_data2%}" class="list-group-item list-group-item-action list-group-item-primary">半年趋势图</a>
+                  <a href="{% url 'draw_picture_sex' age_data1 age_data2 age_data3 age_data4 date_data1 date_data2 date_data3 date_data4 date_data5 date_data6 sex_data1 sex_data2%}" class="list-group-item list-group-item-action list-group-item-secondary">性别分布图</a>
+            </div>
+
+                <div class="col-md-9">
+                        <div id="main" style="width: 1000px;height:600px;"></div>
+
+
+                        <script type="text/javascript">
+
+                            var chartDom = document.getElementById('main');
+                            var myChart = echarts.init(chartDom);
+                            var option;
+
+                            option = {
+                                title: {
+                                    text: '患者数量变化趋势'
+                                },
+                                legend: {
+                                    data:['人数']
+                                },
+                                xAxis: {
+                                    type: 'category',
+                                    data: ['{{time0}}', '{{time1}}', '{{time2}}', '{{time3}}', '{{time4}}', '{{time5}}']
+                                },
+                                yAxis: {
+                                    type: 'value',
+                                    minInterval: 1,
+                                },
+                                series: [{
+                                    data: {{ time_data }},
+                                    type: 'line',
+                                    smooth: true
+                                }]
+                            };
+
+                            option && myChart.setOption(option);
+                    </script>
+                </div>
+
+        </div>
+    </div>
+{% endblock %}

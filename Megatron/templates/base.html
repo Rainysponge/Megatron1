@@ -53,12 +53,18 @@
             </ul>
             <ul class="nav navbar-nav">
             {% if not user.is_authenticated or not user %}
-                    <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">注册</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            <a class="dropdown-item" href="{% url 'docRegister' %}">医生注册</a>
+                            <a class="dropdown-item" href="{% url 'register' %}?from={{ request.get_full_path }}">患者注册</a>
+                        </div>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>
+                        <a class="nav-link" href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>
                     </li>
+
             {% else %}
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

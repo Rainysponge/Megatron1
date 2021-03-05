@@ -151,11 +151,22 @@
         var scene = document.getElementById('scene');
         var parallax = new Parallax(scene);
     </script>
+    <script>
+        if ('{{ massage }}'){
+            console.log('error');
+            window.location.replace("{% url 'home' %}");
+        }else{
+            console.log('nothing');
+        }
+
+    </script>
 {% endblock %}
 
 div.input-group{
     white-space:nowrap;
 }
+
+
 
 
 

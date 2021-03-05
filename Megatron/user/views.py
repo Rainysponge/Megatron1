@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.urls import reverse
 from django.contrib.auth.models import User
-from .forms import LoginFrom, RegForm
-from .models import Profile, Doctor, Patient
+from .forms import LoginFrom, RegForm, docRegForm
+from .models import Profile, Doctor, Patient, Department
+
 
 # Create your views here.
 
@@ -44,13 +45,13 @@ def register(request):
                                              real_name=real_name)
             profile.save()
 
-            identity = reg_form.cleaned_data['identity']
-            if identity == '医生':
-                doctor = Doctor.objects.create(user=user)
-                doctor.save()
-            else:
-                patient = Patient.objects.create(user=user)
-                patient.save()
+            # identity = reg_form.cleaned_data['identity']
+            # if identity == '医生':
+            #     doctor = Doctor.objects.create(user=user)
+            #     doctor.save()
+            # else:
+            #     patient = Patient.objects.create(user=user)
+            #     patient.save()
 
             user = auth.authenticate(username=username, password=password)
             auth.login(request, user)
@@ -60,8 +61,42 @@ def register(request):
 
     context = {}
     context['reg_form'] = reg_form
-    context['form_title'] = '注册'
+    context['form_title'] = '患者注册'
     return render(request, 'user/register.html', context)
+
+
+def docRegister(request):
+    if request.method == 'POST':
+        reg_form = docRegForm(request.POST)
+        if reg_form.is_valid():
+            username = reg_form.cleaned_data['username']
+            password = reg_form.cleaned_data['password']
+            email = reg_form.cleaned_data['email']
+
+            user = User.objects.create_user(username, email, password)  # 创建用户
+            real_name = reg_form.cleaned_data['real_name']
+            sex = reg_form.cleaned_data['sex']
+
+            user.save()
+            profile = Profile.objects.create(user=user, sex=sex,
+                                             real_name=real_name, is_doc=True)
+            department = reg_form.cleaned_data['department']
+            department0 = Department.objects.get(Department_name=department)
+            doc = Doctor.objects.create(user=user, department=department0)
+
+            doc.save()
+            profile.save()
+            user = auth.authenticate(username=username, password =password)
+            auth.login(request, user)
+            return render(request, 'home.html', {'massage': '恭喜你已经成功注册啦，赶紧试试吧！',
+                                                 'error': '1'})
+    else:
+        reg_form = docRegForm()
+
+    context = {}
+    context['reg_form'] = reg_form
+    context['form_title'] = '医生身份注册'
+    return render(request, 'user/docRegister.html', context)
 
 
 def logout(request):

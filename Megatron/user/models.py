@@ -21,7 +21,7 @@ class Profile(models.Model):
 
 class Doctor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    doc_id = models.CharField(max_length=6, null=True, blank=True)
+    # doc_id = models.CharField(max_length=6, null=True, blank=True)
     department = models.ForeignKey(Department, on_delete=models.DO_NOTHING, null=True, blank=True)
     is_active = models.BooleanField(default=True)
 

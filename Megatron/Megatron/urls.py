@@ -26,7 +26,8 @@ urlpatterns = [
     path('Case/', include('medicalCase.urls')),
     path('search/', search, name='search'),
     path('comment/', include('comment.urls')),
-    path('user/', include('user.urls'))
+    path('user/', include('user.urls')),
+    path('uploadFile/', include('fileTest.urls')),
 ]
 
 urlpatterns += static('/media/', document_root=settings.MEDIA_ROOT)

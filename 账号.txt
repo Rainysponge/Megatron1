@@ -12,3 +12,6 @@ firstField	secondField
 
 
 自行测试
+
+
+LOGO需要去背景，白色不太好看

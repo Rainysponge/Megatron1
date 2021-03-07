@@ -23,7 +23,10 @@
 
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">云益问答</a>
+        <a  href="{% url 'home' %}">
+            <img id="logoInBase" src="/media/logoGray.png" />
+        </a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -31,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link {% block homeActive %}{% endblock %}" href="#">主页<span class="sr-only">(current)</span></a>
+                <a class="nav-link {% block homeActive %}{% endblock %}" href="{% url 'home' %}">主页<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% block TeaActive %}{% endblock %}" href="{% url 'uploadFile' %}">上传文件测试<span class="sr-only">(current)</span></a>
@@ -110,6 +113,7 @@
 <style>
     .scene{position: absolute;
            z-index: -1}
+    #logoInBase{width:100px; height:40px}
 </style>
 
 

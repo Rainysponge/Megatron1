@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}{{ form_title }}{% endblock %}
 
+
 {% block contents %}
     <br><br>
     <div class="container">
         <div class="row">
             <div class="col-md-4 mx-auto shadow p-3 bg-white rounded">
+                <img id="logoInDocRegister" src="/media/logo.jpg" />
+                <br><!--这里图片自动会贴合这个div的大小，不需要再加上CSS来调节大小-->
                 <form action="{% url 'docRegister' %}" method="POST">
                     {% csrf_token %}
                     {% for field in reg_form %}
@@ -30,5 +33,7 @@
           }
         })
     </script>
+
+
 
 {% endblock contents %}

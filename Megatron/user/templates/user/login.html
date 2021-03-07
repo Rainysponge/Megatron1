@@ -8,6 +8,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 mx-auto shadow p-3 bg-white rounded">
+                <img id="logoInLogin" src="/media/logoGray.png" />
+                <br>
                 {% csrf_token %}
                 <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
@@ -45,4 +47,14 @@
         </div>
     </div>
 
+
+
 {% endblock contents %}
+<!--<style>
+    #logoInLogin{
+        width:100px;
+        height:40px;
+        text-align:center;
+    }
+</style>-->
+<!--这个地方好像没啥用-->

@@ -151,12 +151,17 @@
         var scene = document.getElementById('scene');
         var parallax = new Parallax(scene);
     </script>
+
+
+
     <script>
-        if ('{{ massage }}'){
-            console.log('error');
+
+        {% for msg in messages %}
+            alert('{{ msg.message }}');
+            {#window.location.replace("{% url 'uploadFile' %}");#}
+        {% endfor %}
+        if('{{ massage }}'){
             window.location.replace("{% url 'home' %}");
-        }else{
-            console.log('nothing');
         }
 
     </script>

@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.urls import reverse
+from django.contrib import messages
 from django.contrib.auth.models import User
+from comment.forms import Search_Comment
 from .forms import LoginFrom, RegForm, docRegForm
 from .models import Profile, Doctor, Patient, Department
 
@@ -15,8 +17,9 @@ def login(request):
         if login_form.is_valid():
             user = login_form.cleaned_data['user']
             auth.login(request, user)
-
-            context = {'log_massage': request.GET.get('from'), 'massage': '登陆成功'}
+            messages.error(request, '登陆成功！')
+            context = {'log_massage': '登陆成功!',
+                       'Search_Comment': Search_Comment()}
             # return redirect(request.GET.get('from', reverse('home')))
             return render(request, 'home.html', context)
     else:
@@ -55,7 +58,8 @@ def register(request):
 
             user = auth.authenticate(username=username, password=password)
             auth.login(request, user)
-            return render(request, 'home.html', {'massage': '恭喜你已经成功注册啦，赶紧试试吧！'})
+            return render(request, 'home.html', {'massage': '恭喜你已经成功注册啦，赶紧试试吧！',
+                                                 'Search_Comment': Search_Comment()})
     else:
         reg_form = RegForm()
 
@@ -89,7 +93,7 @@ def docRegister(request):
             user = auth.authenticate(username=username, password =password)
             auth.login(request, user)
             return render(request, 'home.html', {'massage': '恭喜你已经成功注册啦，赶紧试试吧！',
-                                                 'error': '1'})
+                                                 'Search_Comment': Search_Comment()})
     else:
         reg_form = docRegForm()
 

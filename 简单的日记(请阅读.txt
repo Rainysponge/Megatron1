@@ -14,4 +14,7 @@ firstField	secondField
 自行测试
 
 
-LOGO需要去背景，白色不太好看
+0307 LOGO需要去背景，白色不太好看
+
+
+0308 为了方便测试，我把comment里面的方法注释掉了

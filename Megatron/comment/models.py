@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from user.models import Department
 
 
 # class Comment(models.Model):
@@ -24,3 +25,9 @@ from django.contrib.auth.models import User
 #         ordering = ['-comment_time']
 
 
+class questionsSearched(models.Model):
+    questionsName = models.TextField()
+    numSearched = models.IntegerField(default=0)
+    department = models.ForeignKey(Department, on_delete=models.DO_NOTHING)
+    timeFirstSearched = models.DateTimeField(auto_now_add = True)
+    timeLastSearched = models.DateTimeField(auto_now=True)

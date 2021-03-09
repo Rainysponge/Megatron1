@@ -95,7 +95,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <div class="logo_media">
-                    <img src="/media/logo.jpg" />
+                    <img src="/media/logoDistWithoutBg.png" />
                 </div>
 
             </div>
@@ -162,6 +162,9 @@
         {% endfor %}
         if('{{ massage }}'){
             window.location.replace("{% url 'home' %}");
+        }
+        if('{{ question }}'){
+            console.log('{{ question }}');
         }
 
     </script>

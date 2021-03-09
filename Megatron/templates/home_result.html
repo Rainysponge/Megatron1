@@ -43,6 +43,14 @@
 
                     </div>
                     <div class="col-md-10">
+                        {% if recommend_flag == 1 %}
+                        根据您的输入我们推荐将问题更改为如下例句：<br>
+                            {% for one_question_name in question_name_list %}
+                                {{ one_question_name }}<br>
+                            {% empty %}
+                            {% endfor %}
+                        {% else %}
+                        {% endif %}
                         <div class="table-responsive">
                         <table class="table table-striped table-dark">
                               <thead>
@@ -53,7 +61,6 @@
                                             {% else %}
                                             {% endif %}
                                         {% empty %}
-                                            <h3>---暂无信息---</h3>
                                         {% endfor %}
                                     </tr>
                               </thead>
@@ -65,11 +72,52 @@
                                          {% endfor %}
                                      </tr>
                                      {% empty %}
-                                     <h3>---暂无信息---</h3>
                                   {% endfor %}
                               </tbody>
                             </table>
                         </div>
+
+                        <div class="treatment_data">
+                            <br>
+                            {% if disease_name != "0"%}
+                            {{ disease_name }}的临床诊治数据分布
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                     <th scope="col">治疗方法</th>
+                                        {# <td>手术</td><td>中药</td> #}
+                                        {% for one_treatment_name in all_treatment_name %}
+                                                <td>{{ one_treatment_name}}</td>
+                                        {% empty %}
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="col">占比</th>
+                                    {% for treatment_data in all_treatment_data %}
+                                        <td>{{ treatment_data}}%</td>
+                                    {% empty %}
+                                    {% endfor %}
+                                    </tr>
+                                    {% if treatment_warning_flag > 0 %}
+                                        <tr>
+                                            <th scope="col">好转率</th>
+                                        {% for one_better_rate in better_rate %}
+                                            <td>{{ one_better_rate}}%</td>
+                                        {% empty %}
+                                        {% endfor %}
+                                        </tr>
+                                    {% else %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                            {% else %}
+                            {% endif %}
+
+                        </div>
+
+
                     </div>
                 </div>
 
@@ -98,19 +146,34 @@
                       </tr>
                     </tbody>
                 </table>
+
                 <a class="btn btn-outline-primary" href="{% url 'draw_picture' age_data1 age_data2 age_data3 age_data4 date_data1 date_data2 date_data3 date_data4 date_data5 date_data6 sex_data1 sex_data2%}" role="button">绘制图表</a>
+                <br><br>
+
+                        <div class="recommend_thesis">
+                            <br>
+                            相关论文推荐：<br>
+                            {% for one_thesis in disease_thesis %}
+                                <a href="{{ one_thesis.link }}">{{ one_thesis.title }}</a><br>
+                            {% endfor %}
+                            {% for one_thesis in treatment_thesis %}
+                                <a href="{{ one_thesis.link }}">{{ one_thesis.title }}</a><br>
+                            {% endfor %}
+                        </div>
             </div>
 
         </div>
 
-
-
+            {# {{ all_treatment_name }} #}
+            {# {{ all_treatment_data }} #}
+            {# {{ patient_id_data }}    #}
     </div>
     <style>
         #search_logo{width:100px; height:40px}
 
     </style>
 {% endblock %}
+
 
 
 

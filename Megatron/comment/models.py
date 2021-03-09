@@ -26,8 +26,14 @@ from user.models import Department
 
 
 class questionsSearched(models.Model):
-    questionsName = models.TextField()
-    numSearched = models.IntegerField(default=0)
-    department = models.ForeignKey(Department, on_delete=models.DO_NOTHING)
-    timeFirstSearched = models.DateTimeField(auto_now_add = True)
-    timeLastSearched = models.DateTimeField(auto_now=True)
+    questionsName = models.TextField(verbose_name="问题")
+    numSearched = models.IntegerField(default=0, verbose_name="次数")
+    department = models.ForeignKey(Department, on_delete=models.DO_NOTHING, verbose_name="科室")
+    timeFirstSearched = models.DateTimeField(auto_now_add=True, verbose_name="第一次被查询")
+    timeLastSearched = models.DateTimeField(auto_now=True, verbose_name="最后一次被查询")
+
+
+class thesis(models.Model):
+    title = models.CharField(max_length=100)
+    key_word = models.CharField(max_length=16)
+    link = models.TextField()

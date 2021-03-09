@@ -2,36 +2,150 @@
 {% block title %}上传文件测试{% endblock %}
 
 {% block styleExpands %}
+    <style>
+        body {
 
+          background-image: url("/media/fileUploadbg.jpeg");
+
+          background-position: center 0;
+
+          background-repeat: no-repeat;
+
+          background-attachment: fixed;
+
+          background-size: cover;
+
+          -webkit-background-size: cover;
+
+          -o-background-size: cover;
+
+          -moz-background-size: cover;
+
+        }
+
+    #formDiv {
+
+        background-image: url('/media/fileUploadY.jpeg');
+        background-repeat: no-repeat;
+
+    }
+    #formDivs {
+
+        background-image: url('/media/fileUploadYs.jpeg');
+        background-repeat: no-repeat;
+
+    }
+    form {
+        font-family: 'Gabriola';
+    }
+
+    .btn-info{
+        text-align: center;
+    }
+    </style>
 {% endblock %}
+
 
 
 {% block contents %}
     <br><br><br>
-{#    <form action="{% url 'uploadFile' %}" method="POST">#}
-{#        <div class="form-group">#}
-{#            <label for="exampleFormControlFile1">Example file input</label>#}
-{#            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="excelFile">#}
-{#        </div>#}
-{#    </form>#}
+    <div class="container">
+        <div class="row">
+            <div id="formDiv" class="col-md-4">
+                <br><br><br>
+                <form action="{% url 'uploadFile_result' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputFile">上传t_result数据文件</label>
+                        <input type="file" name="file">
+                        <br>
+                        <input type="submit" value="上传" class="btn btn-info">
+                    </div>
+                </form>
+                <br><br>
+            </div>
+            <div class="col-md-4"></div>
+            <div id="formDiv" class="col-md-4">
+                <br><br><br>
+                <form action="{% url 'uploadFile_patient' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputFile">上传patient数据文件patient</label>
+                        <input type="file" name="file">
+                        <br>
+                        <input type="submit" value="上传" class="btn btn-info">
+                    </div>
+                </form>
+            </div>
 
-
-    <form action="{% url 'uploadFile' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="exampleInputFile">上传(excel)数据文件</label>
-            <input type="file" name="file">
-            <br>
-            <input type="submit" value="上传" class="btn btn-info">
         </div>
-    </form>
+
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div id="formDivs" class="col-md-4">
+                <br><br><br><br>
+                <form action="{% url 'uploadFile_department' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputFile">上传department数据文件</label>
+                        <input type="file" name="file">
+                        <br>
+                        <input type="submit" value="上传" class="btn btn-info">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+        <div class="row">
+            <div id="formDiv" class="col-md-4">
+                <br><br><br>
+                <form action="{% url 'uploadFile_treatment' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputFile">上传treatment数据文件</label>
+                        <input type="file" name="file">
+                        <br>
+                        <input type="submit" value="上传" class="btn btn-info">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+
+            <div id="formDiv" class="col-md-4">
+                <br><br><br>
+                <form action="{% url 'uploadFile_illness' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputFile">上传illness数据文件illness</label>
+                        <input type="file" name="file">
+                        <br>
+                        <input type="submit" value="上传" class="btn btn-info">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
         <script>
           {% for msg in messages %}
               alert('{{ msg.message }}');
-              window.location.replace("{% url 'uploadFile' %}");
+              window.location.replace("{% url 'uploadFile_result' %}");
           {% endfor %}
         </script>
+
 
 
 {% endblock %}

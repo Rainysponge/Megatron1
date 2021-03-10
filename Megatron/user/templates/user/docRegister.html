@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
 {% block title %}{{ form_title }}{% endblock %}
-
+{% block styleExpands %}
+    <style>
+        body {
+          background-image: url("/media/bg4.jpg");
+          background-position: center 0;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+          -webkit-background-size: cover;
+          -o-background-size: cover;
+          -moz-background-size: cover;
+        }
+    </style>
+{% endblock %}
 
 {% block contents %}
     <br><br>
@@ -37,3 +50,5 @@
 
 
 {% endblock contents %}
+
+<!-- 如果内容没有放在block里面，该内容无效 -->

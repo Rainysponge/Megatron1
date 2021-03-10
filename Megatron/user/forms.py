@@ -143,6 +143,15 @@ class docRegForm(forms.Form):
         return password_again
 
 
+class changeDocInfoForm(forms.Form):
+    department_list = Department.objects.all()
+    DEPARTMENT = []
+    for item in department_list:
+        DEPARTMENT.append([item.Department_name, item.Department_name])
+
+    department = forms.ChoiceField(label='科室', choices=DEPARTMENT)
+
+
 
 
 

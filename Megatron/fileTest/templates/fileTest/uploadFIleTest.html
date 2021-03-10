@@ -39,9 +39,7 @@
         font-family: 'Gabriola';
     }
 
-    .btn-info{
-        text-align: center;
-    }
+
     </style>
 {% endblock %}
 
@@ -57,7 +55,7 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="exampleInputFile">上传t_result数据文件</label>
-                        <input type="file" name="file">
+                        <input type="file" name="file" >
                         <br>
                         <input type="submit" value="上传" class="btn btn-info">
                     </div>
@@ -70,7 +68,7 @@
                 <form action="{% url 'uploadFile_patient' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="exampleInputFile">上传patient数据文件patient</label>
+                        <label for="exampleInputFile">上传patient数据文件</label>
                         <input type="file" name="file">
                         <br>
                         <input type="submit" value="上传" class="btn btn-info">
@@ -117,7 +115,7 @@
                 <form action="{% url 'uploadFile_illness' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="exampleInputFile">上传illness数据文件illness</label>
+                        <label for="exampleInputFile">上传illness数据文件</label><br>
                         <input type="file" name="file">
                         <br>
                         <input type="submit" value="上传" class="btn btn-info">

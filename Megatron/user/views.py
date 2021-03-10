@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.urls import reverse
-from django.contrib import messages
 from django.contrib.auth.models import User
 from comment.forms import Search_Comment
-from .forms import LoginFrom, RegForm, docRegForm
+from .forms import LoginFrom, RegForm, docRegForm, changeDocInfoForm
 from .models import Profile, Doctor, Patient, Department
 
 
@@ -106,3 +105,43 @@ def docRegister(request):
 def logout(request):
     auth.logout(request)
     return redirect(request.GET.get('from', reverse('home')))
+
+
+def changeDocInfo(request):
+    if not request.user.is_authenticated:
+        login_form = LoginFrom()
+
+        context = {'login_form': login_form, 'form_title': '登录'}
+        messages.error(request, '请先登录！')
+        return render(request, 'user/login.html', context)
+    if request.method == 'POST':
+        changeDocForm = changeDocInfoForm(request.POST)
+        if changeDocForm.is_valid():
+            user = request.user
+            department = changeDocForm.cleaned_data['department']
+            department0 = Department.objects.get(Department_name=department)
+
+            doc = Doctor.objects.get(user=user)
+            doc.department = department0
+            doc.save()
+            messages.error(request, '科室已更改为' + department)
+
+
+    else:
+        changeDocForm = changeDocInfoForm(request.POST)
+
+    context = {}
+    # context['page_title'] = '欢迎'
+    context['change_doc_info_form'] = changeDocForm
+    context['form_title'] = '更改部门'
+
+    return render(request, 'user/changeDocInfo.html', context)
+
+
+
+
+
+
+
+
+

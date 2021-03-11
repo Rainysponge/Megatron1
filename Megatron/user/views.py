@@ -89,7 +89,7 @@ def docRegister(request):
 
             doc.save()
             profile.save()
-            user = auth.authenticate(username=username, password =password)
+            user = auth.authenticate(username=username, password=password)
             auth.login(request, user)
             return render(request, 'home.html', {'massage': '恭喜你已经成功注册啦，赶紧试试吧！',
                                                  'Search_Comment': Search_Comment()})
@@ -126,7 +126,6 @@ def changeDocInfo(request):
             doc.save()
             messages.error(request, '科室已更改为' + department)
 
-
     else:
         changeDocForm = changeDocInfoForm(request.POST)
 
@@ -136,12 +135,3 @@ def changeDocInfo(request):
     context['form_title'] = '更改部门'
 
     return render(request, 'user/changeDocInfo.html', context)
-
-
-
-
-
-
-
-
-

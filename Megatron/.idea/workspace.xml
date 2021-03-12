@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9334c845-0667-484c-8954-5690126c4fe1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/fileTest/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/comment/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileTest/templates/fileTest/uploadFIleTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/fileTest/templates/fileTest/uploadFIleTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileTest/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/fileTest/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileTest/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/fileTest/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/t/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/t/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,6 +132,7 @@
       <workItem from="1615375766995" duration="1176000" />
       <workItem from="1615376993374" duration="2290000" />
       <workItem from="1615455124383" duration="9332000" />
+      <workItem from="1615507406700" duration="3340000" />
     </task>
     <servers />
   </component>
@@ -146,6 +143,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615509096392">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1615509096392" />
     <state x="505" y="116" key="FileChooserDialogImpl" timestamp="1615207688790">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -155,10 +156,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1611901483829" />
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1615455141810">
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1615507415237">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1615455141810" />
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1615507415237" />
     <state x="390" y="200" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1615272360960" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1615217124161">
       <screen x="0" y="0" width="1536" height="824" />

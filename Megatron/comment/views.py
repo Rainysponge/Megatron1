@@ -1,5 +1,6 @@
 import os
 import re
+import jieba
 import pymysql
 pymysql.install_as_MySQLdb()
 import MySQLdb
@@ -185,6 +186,8 @@ def draw_picture_sex(request, age_data1, age_data2, age_data3, age_data4, date_d
     return render(request, 'draw_picture_sex.html', context)
 
 
+
+
 def find_result(request):
     if not request.user.is_authenticated:
         messages.error(request, '请登陆后再使用该功能！')
@@ -193,9 +196,6 @@ def find_result(request):
     # else:
     user = request.user
     doctor = Doctor.objects.get(user=user)
-    #     # messages.success(request, user.username + '用户已登录\t' + doctor.department.Department_name)
-    #     context = {'Search_Comment': Search_Comment()}
-    #     return render(request, 'home.html', context)
     conn = MySQLdb.connect(
         host='localhost',
         port=3306,
@@ -204,7 +204,7 @@ def find_result(request):
         db='medicalproject1',
     )
     cur = conn.cursor()
-    #
+
     Search_Comment_form = Search_Comment(request.POST)
     # # path = "1"
     if Search_Comment_form.is_valid():
@@ -258,64 +258,69 @@ def find_result(request):
         p1 = str(p.read())  # cmd的返回结果
 
         sql = p1.split('\n')
-
+        ignoreList = {'低', '高', '男', '女', '好', '年'}
         if question == "" or sql[-2].find("SELECT") < 0:  # 要改
-            if questionsSearched.objects.filter(questionsName__contains=question):
-                context = {}
-                question_list = questionsSearched.objects.filter(questionsName__contains=question)
-                msgQList = []
-                question_name_list = []
-                for i in range(len(question_list)):
-                    question_list[i].numSearched += 1
-                    msgQList.append(question_list[i].questionsName)
-                    question_list[i].save()
-                for j in range(len(question_list)):
-                    question_name_list.append(question_list[j].questionsName)
-                messages.error(request, ','.join(msgQList))
-                # 这里的message msgQList都是测试用的，为了表名可以结合科室找到包含搜索项的问题
-                context['age_data1'] = 0
-                context['age_data2'] = 0
-                context['age_data3'] = 0
-                context['age_data4'] = 0
+            seq_list = list(jieba.cut(question, cut_all=False))  # 分词列表
+            for seq in seq_list:
+                if seq in ignoreList:
+                    continue
+                if questionsSearched.objects.filter(questionsName__contains=seq):
+                    context = {}
 
-                context['date_data1'] = 0
-                context['date_data2'] = 0
-                context['date_data3'] = 0
-                context['date_data4'] = 0
-                context['date_data5'] = 0
-                context['date_data6'] = 0
+                    question_list = questionsSearched.objects.filter(questionsName__contains=seq)
+                    msgQList = set()
+                    question_name_list = set()
+                    for i in range(len(question_list)):
+                        question_list[i].numSearched += 1
+                        msgQList.add(question_list[i].questionsName)
+                        question_list[i].save()
+                    for j in range(len(question_list)):
+                        question_name_list.add(question_list[j].questionsName)
+                    messages.error(request, ','.join(msgQList))
+                    # 这里的message msgQList都是测试用的，为了表名可以结合科室找到包含搜索项的问题
+                    context['age_data1'] = 0
+                    context['age_data2'] = 0
+                    context['age_data3'] = 0
+                    context['age_data4'] = 0
 
-                context['sex_data1'] = 0
-                context['sex_data2'] = 0
-                context['disease_name'] = "0"
-                context['Search_Comment'] = Search_Comment()
-                context['recommend_flag'] = 1
-                context['question_name_list'] = question_name_list
-                return render(request, 'home_result.html', context)
-            else:
-                context = {}
-                question = questionsSearched.objects.create(questionsName=question, department=doctor.department)
-                # 大致方法就是这个样子样子了， 就是要在question = questionsSearched.objects.create这个语句之前完成sql语句的生成
-                # 然后再save，避免出现无法查询的问题！
-                # sql在这后面
-                question.save()
-                messages.error(request, question)
-                context['age_data1'] = 0
-                context['age_data2'] = 0
-                context['age_data3'] = 0
-                context['age_data4'] = 0
+                    context['date_data1'] = 0
+                    context['date_data2'] = 0
+                    context['date_data3'] = 0
+                    context['date_data4'] = 0
+                    context['date_data5'] = 0
+                    context['date_data6'] = 0
 
-                context['date_data1'] = 0
-                context['date_data2'] = 0
-                context['date_data3'] = 0
-                context['date_data4'] = 0
-                context['date_data5'] = 0
-                context['date_data6'] = 0
+                    context['sex_data1'] = 0
+                    context['sex_data2'] = 0
+                    context['disease_name'] = "0"
+                    context['Search_Comment'] = Search_Comment()
+                    context['recommend_flag'] = 1
+                    context['question_name_list'] = question_name_list
+                    return render(request, 'home_result.html', context)
+                else:
+                    context = {}
+                    question = questionsSearched.objects.create(questionsName=question, department=doctor.department)
+                    # 大致方法就是这个样子样子了， 就是要在question = questionsSearched.objects.create这个语句之前完成sql语句的生成
+                    # 然后再save，避免出现无法查询的问题！
+                    # sql在这后面
+                    question.save()
+                    messages.error(request, question)
+                    context['age_data1'] = 0
+                    context['age_data2'] = 0
+                    context['age_data3'] = 0
+                    context['age_data4'] = 0
 
-                context['sex_data1'] = 0
-                context['sex_data2'] = 0
-                context['Search_Comment'] = Search_Comment()
-                return render(request, 'home_result.html', context)
+                    context['date_data1'] = 0
+                    context['date_data2'] = 0
+                    context['date_data3'] = 0
+                    context['date_data4'] = 0
+                    context['date_data5'] = 0
+                    context['date_data6'] = 0
+
+                    context['sex_data1'] = 0
+                    context['sex_data2'] = 0
+                    context['Search_Comment'] = Search_Comment()
+                    return render(request, 'home_result.html', context)
         else:   # 加个好转率
             if woman_flag == 1:
                 sql[-2] = sql[-2].replace(";", " and t_patient.gender = '女';")

@@ -268,15 +268,15 @@ def find_result(request):
                     context = {}
 
                     question_list = questionsSearched.objects.filter(questionsName__contains=seq)
-                    msgQList = set()
-                    question_name_list = set()
+                    # msgQList = set()
+                    question_name_list = set()  # 集合去重
                     for i in range(len(question_list)):
                         question_list[i].numSearched += 1
-                        msgQList.add(question_list[i].questionsName)
+                        # msgQList.add(question_list[i].questionsName)
                         question_list[i].save()
                     for j in range(len(question_list)):
                         question_name_list.add(question_list[j].questionsName)
-                    messages.error(request, ','.join(msgQList))
+                    # messages.error(request, ','.join(msgQList))
                     # 这里的message msgQList都是测试用的，为了表名可以结合科室找到包含搜索项的问题
                     context['age_data1'] = 0
                     context['age_data2'] = 0

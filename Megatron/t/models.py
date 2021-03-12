@@ -73,7 +73,7 @@ class treatment(models.Model):
     # patient = models.ForeignKey(patient, on_delete=models.DO_NOTHING)
     # 直接定义patient_id不用外键 patient_id =
     treatment_name = models.CharField(max_length=100, verbose_name="诊疗方法")
-    comment = models.CharField(max_length=100, verbose_name="诊疗评论") # 同上 两个comment没啥用
+    comment = models.CharField(max_length=100, verbose_name="诊疗评论")  # 同上 两个comment没啥用
     enabled = models.IntegerField(default=0, verbose_name="有效")
     deleted = models.IntegerField(default=0, verbose_name="无效")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="入院时间")

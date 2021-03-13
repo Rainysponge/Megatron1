@@ -19,7 +19,7 @@
                     <div class="col-md-10">
                         <div class="input-group">
                             <form action="{% url 'find_result' %}" method="POST" style="overflow:hidden">
-                                <label>Search</label>
+
                                 {% csrf_token %}
                                 {% for field in Search_Comment %}
                                     {{ field }}
@@ -164,14 +164,17 @@
 
         </div>
 
-            {# {{ all_treatment_name }} #}
-            {# {{ all_treatment_data }} #}
-            {# {{ patient_id_data }}    #}
+
     </div>
     <style>
         #search_logo{width:100px; height:40px}
 
     </style>
+
+    <script>
+        console.log('{{ question }}');
+        document.getElementById('id_text').value='{{ question }}';
+    </script>
 {% endblock %}
 
 

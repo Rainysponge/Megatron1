@@ -1,9 +1,51 @@
 {% extends 'base.html' %}
 {% block title %}主页{% endblock %}
+{% block exampleShow %}
+    <li class="nav-item">
+        <a class="nav-link" href="#" onclick="dianwo()">例句展示</a>
+    </li>
+{% endblock %}
 
 {% block styleExpands %}
+{#    <link rel="stylesheet" type="text/css" href="http://matthew.wagerfield.com/parallax/assets/styles/css/styles.css">#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>#}
+{#    <script src="http://matthew.wagerfield.com/parallax/assets/scripts/js/libraries.min.js"></script>#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>#}
     <style>
         .logo_media{text-align:center}
+
+        .popBtn{
+				position: fixed;
+				left: 0px;
+				top: 0px;
+				background: #000;
+				width: 100%;
+				height: 100%;
+				opacity: 0.5;
+			}
+        .tankuang{
+            position: relative;
+            background: #fff;
+            width: 50%;
+            height: 80%;
+            border-radius: 5px;
+            margin: 5% auto;
+        }
+        #header{
+            height: 40px;
+        }
+        #header-right{
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            background: red;
+            color: #fff;
+            right: 5px;
+            top: 5px;
+            text-align: center;
+        }
+
     </style>
 
 {% endblock %}
@@ -133,19 +175,42 @@
 
                 <div class="hot_search">
 
-                    <div>热门搜索</div>   <!-- 字体设置 -->
-
-                    <div class="row">
-
-                        <div class="col-md-6">123222222222222222222222222222</div>
-                        <div class="col-md-6">123222222222222222222222222222</div>
-                    </div>
-                </div>
+{#                    <div>热门搜索</div>   <!-- 字体设置 -->#}
+{##}
+{#                    <div class="row">#}
+{##}
+{#                        <div class="col-md-6">123222222222222222222222222222</div>#}
+{#                        <div class="col-md-6">123222222222222222222222222222</div>#}
+{#                    </div>#}
+{#                </div>#}
             </div>
 
             <div class="col-md-2"></div>
         </div>
     </div>
+
+
+
+    </div>
+
+		<div class="popBtn" id='popBtn'>
+			<div class="tankuang">
+				<div id="header">
+					<span>我是弹窗</span>
+					<div id="header-right" onclick="hidder()">x</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			document.getElementById('popBtn').style.display="none";
+			function dianwo(){
+				document.getElementById('popBtn').style.display="";
+			}
+			function hidder(){
+				document.getElementById('popBtn').style.display="none";
+			}
+		</script>
+
 
     <script>
         var scene = document.getElementById('scene');
@@ -166,7 +231,9 @@
         if('{{ question }}'){
             console.log('{{ question }}');
         }
-
+        {#$(function () {#}
+        {#  $('[data-toggle="popover"]').popover()#}
+        {#});#}
     </script>
 {% endblock %}
 

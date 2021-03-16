@@ -196,14 +196,14 @@ def find_result(request):
     # else:
     user = request.user
     doctor = Doctor.objects.get(user=user)
-    conn = MySQLdb.connect(
-        host='localhost',
-        port=3306,
-        user='root',
-        passwd='Mouhao0715',
-        db='medicalproject1',
-    )
-    cur = conn.cursor()
+    # conn = MySQLdb.connect(
+    #     host='localhost',
+    #     port=3306,
+    #     user='root',
+    #     passwd='Mouhao0715',
+    #     db='medicalproject1',
+    # )
+    # cur = conn.cursor()
 
     Search_Comment_form = Search_Comment(request.POST)
     # # path = "1"
@@ -276,7 +276,10 @@ def find_result(request):
                     #
                     #     question_list[i].save()
                     for j in range(len(question_list)):
+                        if j >= 3:
+                            break
                         question_name_list.add(question_list[j].questionsName)
+
             context = {}
             context['age_data1'] = 0
             context['age_data2'] = 0
@@ -323,233 +326,247 @@ def find_result(request):
             # context['Search_Comment'] = Search_Comment()
 
             # return render(request, 'home_result.html', context)
-        else:  # 加个好转率
-            if woman_flag == 1:
-                sql[-2] = sql[-2].replace(";", " and t_patient.gender = '女';")
-            elif man_flag == 1:
-                sql[-2] = sql[-2].replace(";", " and t_patient.gender = '男';")
-
-            if year_data != "0":
-                year_str = " and t_patient.created_time like '" + year_data + "%';"
-                sql[-2] = sql[-2].replace(";", year_str)
-
-            #  放最后避免treatment_name无法更新
-            if not_flag == 1:
-                sql[-2] = sql[-2].replace("t_treatment.treatment_name like", "t_treatment.treatment_name not like")
-
-            disease_flag = -1
-            disease_name = "0"
-            treatment_flag = -1
-            treatment_name = "0"
-            disease_obj = re.search(r'^(.*)t_illness.illness_name like \'(.*?)\'(.*)$', sql[-2])
-            if disease_obj:
-                disease_name = disease_obj.group(2)
-            treatment_obj = re.search(r'^(.*)t_treatment.treatment_name like \'(.*?)\'(.*)$', sql[-2])
-            if treatment_obj:
-                treatment_name = treatment_obj.group(2)
-
-            result_num = cur.execute(sql[-2])
-
-            SqlDomain = cur.description  # 获取属性名,返回的元组只有[0]为需要的 （[shuxingming],[])
-            DomainNum = len(SqlDomain)
-            SqlDomainName = []
-            # SqlDomainName = [None] * DomainNum  # 前端判断为None就不输出
-            age_flag = 0  # 记录年龄所在列
-            age_data = [0] * 4
-
-            date_flag = 0  # 记录update_time的列数
-            date_data = [0] * 6
-
-            sex_flag = 0
-            sex_data = [0] * 2
-            #  datetime.date.today() - relativedelta(months=+1)
-            now = datetime.datetime.now().replace(day=1)
-            # delta = datetime.timedelta(months=1)
-            # now_1 = (now - delta).strftime('%Y-%m')
-            # now_2 = (now - delta*2).strftime('%Y-%m')
-            # now_3 = (now - delta*3).strftime('%Y-%m')
-            # now_4 = (now - delta*4).strftime('%Y-%m')
-            # now_5 = (now - delta*5).strftime('%Y-%m')
-            # now_6 = now - delta*6.strftime('%Y-%m')
-            now_1 = (now - relativedelta(months=+1))
-            now_2 = (now - relativedelta(months=+2))
-            now_3 = (now - relativedelta(months=+3))
-            now_4 = (now - relativedelta(months=+4))
-            now_5 = (now - relativedelta(months=+5))
-
-            # dic = {'patient_id': '患者编号'}
-            comment_flag = 0
-            better_num = 0
-            sum_num = 0
-            better_rate = 0
-
-            patient_id_flag = -1
-            patient_id_data = []
-
-            deleted_name = ["enabled", "deleted", "created_time", "updated_time"]  # 不要的字段
-            if sql[-2].find("result") > 0:
-                deleted_name.append("comment")
-            existed_name = []  # 去重
-            location = []  # 记录需要的列
-            for i in range(DomainNum):
-                if SqlDomain[i][0] == "updated_time":
-                    date_flag = i
-                elif SqlDomain[i][0] not in deleted_name and SqlDomain[i][0] not in existed_name:
-                    SqlDomainName.append(SqlDomain[i][0])
-                    # SqlDomainName.append(dic[SqlDomain[i][0]])
-                    existed_name.append(SqlDomain[i][0])
-                    location.append(i)
-                    if SqlDomain[i][0] == "age":
-                        age_flag = i
-                    if SqlDomain[i][0] == "gender":
-                        sex_flag = i
-                    if SqlDomain[i][0] == "comment":
-                        comment_flag = i
-                    if SqlDomain[i][0] == "illness_name":
-                        disease_flag = i
-                    if SqlDomain[i][0] == "treatment_name":
-                        treatment_flag = i
-                    if SqlDomain[i][0] == "patient_id":
-                        patient_id_flag = i
-
-            gain_data = cur.fetchmany(result_num)
-            result1 = []
-
-            for i in range(result_num):
-                temp = []
-                for j in range(len(gain_data[0])):
-                    if j in location:  # 获取需要数据
-                        temp.append(gain_data[i][j])
-                    if j == age_flag:  # 判断年龄分布
-                        if gain_data[i][j] < 17:
-                            age_data[0] += 1
-                        elif 17 < gain_data[i][j] < 40:
-                            age_data[1] += 1
-                        elif 40 < gain_data[i][j] < 65:
-                            age_data[2] += 1
-                        elif gain_data[i][j] > 65:
-                            age_data[3] += 1
-                    if j == date_flag:  # 病例趋势
-                        if gain_data[i][j].__ge__(now_5) and gain_data[i][j].__lt__(now_4):
-                            date_data[0] += 1
-                        elif gain_data[i][j].__ge__(now_4) and gain_data[i][j].__lt__(now_3):
-                            date_data[1] += 1
-                        elif gain_data[i][j].__ge__(now_3) and gain_data[i][j].__lt__(now_2):
-                            date_data[2] += 1
-                        elif gain_data[i][j].__ge__(now_2) and gain_data[i][j].__lt__(now_1):
-                            date_data[3] += 1
-                        elif gain_data[i][j].__ge__(now_1) and gain_data[i][j].__lt__(now):
-                            date_data[4] += 1
-                        elif gain_data[i][j].__ge__(now):  # 本月数据
-                            date_data[5] += 1
-                    if j == sex_flag:
-                        if gain_data[i][j] == '男':
-                            sex_data[0] += 1
-                        if gain_data[i][j] == '女':
-                            sex_data[1] += 1
-                    # if j == disease_flag:
-                    #     disease_name = gain_data[i][j]
-                    # if j == treatment_flag:
-                    #     treatment_name = gain_data[i][j]
-                    # if j == comment_flag:  # 统计好转率
-                    #     sum_num += 1
-                    #     if gain_data[i][j] == '好转':
-                    #         better_num += 1
-                    if j == patient_id_flag:  # 统计好转率
-                        patient_id_data.append(gain_data[i][j])
-
-                result1.append(temp)
-
-            disease_thesis = thesis.objects.filter(key_word=disease_name)
-            treatment_thesis = thesis.objects.filter(key_word=treatment_name)
-
-            # if sum_num > 0:
-            #     better_rate = better_num / sum_num * 100
-            # else:
-            #     better_rate = 0
-
-            # 获取每个症状的治疗手法
-            all_treatment_name = []
-            all_treatment_data = []
-            all_better_data = []
-            treatment_sum = 0
-
-            treatment_warning_flag = 1
-
-            # 权限判断
-            for i in patient_id_data:
-                department_result = department.objects.get(patient_id=i)
-                if department_result.department_name != doctor.department.Department_name:
-                    messages.error(request, '没有查询权限')
-                    context = {'Search_Comment': Search_Comment()}
-                    return render(request, 'home.html', context)
-
-            for i in patient_id_data:
-                Treatment = treatment.objects.get(patient_id=i)
-                tre_result = result.objects.get(patient_id=i)
-                add_flag = 1
-                for j in range(len(all_treatment_name)):
-                    if all_treatment_name[j] == Treatment.treatment_name:
-                        add_flag = 0
-                if add_flag > 0:
-                    all_treatment_name.append(Treatment.treatment_name)
-                    all_treatment_data.append(int(1))
-                    if tre_result.result_comment == "好转":
-                        all_better_data.append(int(1))
-                    else:
-                        all_better_data.append(int(0))
-                else:
-                    all_treatment_data[j] = int(all_treatment_data[j]) + 1
-                    if tre_result.result_comment == "好转":
-                        all_better_data[j] = int(all_better_data[j]) + 1
-                treatment_sum += 1
-
-            for j in range(len(all_treatment_name)):
-                if all_treatment_name[j] == "纤维结合蛋白":
-                    treatment_warning_flag = 0
-
-            better_rate = []
-            for i in range(len(all_treatment_data)):
-                temp = all_better_data[i]*100 / all_treatment_data[i]
-                temp = round(temp, 2)
-                better_rate.append(temp)
-                all_treatment_data[i] = all_treatment_data[i] * 100 / treatment_sum
-                all_treatment_data[i] = round(all_treatment_data[i], 2)
-                # all_treatment_data[i] *= 100
-                # all_treatment_data[i] = int(all_treatment_data[i])
-                # all_treatment_data[i] /= 100.0
-
-            context = {}
-            context["location"] = location
-            context["result_name"] = SqlDomainName
-            context["result"] = result1
-            context["sql"] = sql[-2]
-            context["result_num"] = result_num
-            context['Search_Comment'] = Search_Comment()
-            context['better_rate'] = better_rate
-
-            context['age_data1'] = age_data[0]
-            context['age_data2'] = age_data[1]
-            context['age_data3'] = age_data[2]
-            context['age_data4'] = age_data[3]
-
-            context['date_data1'] = date_data[0]
-            context['date_data2'] = date_data[1]
-            context['date_data3'] = date_data[2]
-            context['date_data4'] = date_data[3]
-            context['date_data5'] = date_data[4]
-            context['date_data6'] = date_data[5]
-
-            context['sex_data1'] = sex_data[0]
-            context['sex_data2'] = sex_data[1]
-
-            context['disease_thesis'] = disease_thesis
-            context['treatment_thesis'] = treatment_thesis
-            context['question'] = Search_Comment.text
-            context['disease_name'] = disease_name  # 如果 = "0" 不需要输出治疗手法与占比
-            context['treatment_warning_flag'] = treatment_warning_flag
-            context['all_treatment_name'] = all_treatment_name
-            context['all_treatment_data'] = all_treatment_data
-            context['patient_id_data'] = patient_id_data
+        # else:  # 加个好转率
+        #     if woman_flag == 1:
+        #         sql[-2] = sql[-2].replace(";", " and t_patient.gender = '女';")
+        #     elif man_flag == 1:
+        #         sql[-2] = sql[-2].replace(";", " and t_patient.gender = '男';")
+        #
+        #     if year_data != "0":
+        #         year_str = " and t_patient.created_time like '" + year_data + "%';"
+        #         sql[-2] = sql[-2].replace(";", year_str)
+        #
+        #     #  放最后避免treatment_name无法更新
+        #     if not_flag == 1:
+        #         sql[-2] = sql[-2].replace("t_treatment.treatment_name like", "t_treatment.treatment_name not like")
+        #
+        #     disease_flag = -1
+        #     disease_name = "0"
+        #     treatment_flag = -1
+        #     treatment_name = "0"
+        #     disease_obj = re.search(r'^(.*)t_illness.illness_name like \'(.*?)\'(.*)$', sql[-2])
+        #     if disease_obj:
+        #         disease_name = disease_obj.group(2)
+        #     treatment_obj = re.search(r'^(.*)t_treatment.treatment_name like \'(.*?)\'(.*)$', sql[-2])
+        #     if treatment_obj:
+        #         treatment_name = treatment_obj.group(2)
+        #
+        #     result_num = cur.execute(sql[-2])
+        #
+        #     SqlDomain = cur.description  # 获取属性名,返回的元组只有[0]为需要的 （[shuxingming],[])
+        #     DomainNum = len(SqlDomain)
+        #     SqlDomainName = []
+        #     # SqlDomainName = [None] * DomainNum  # 前端判断为None就不输出
+        #     age_flag = 0  # 记录年龄所在列
+        #     age_data = [0] * 4
+        #
+        #     date_flag = 0  # 记录update_time的列数
+        #     date_data = [0] * 6
+        #
+        #     sex_flag = 0
+        #     sex_data = [0] * 2
+        #     #  datetime.date.today() - relativedelta(months=+1)
+        #     now = datetime.datetime.now().replace(day=1)
+        #     # delta = datetime.timedelta(months=1)
+        #     # now_1 = (now - delta).strftime('%Y-%m')
+        #     # now_2 = (now - delta*2).strftime('%Y-%m')
+        #     # now_3 = (now - delta*3).strftime('%Y-%m')
+        #     # now_4 = (now - delta*4).strftime('%Y-%m')
+        #     # now_5 = (now - delta*5).strftime('%Y-%m')
+        #     # now_6 = now - delta*6.strftime('%Y-%m')
+        #     now_1 = (now - relativedelta(months=+1))
+        #     now_2 = (now - relativedelta(months=+2))
+        #     now_3 = (now - relativedelta(months=+3))
+        #     now_4 = (now - relativedelta(months=+4))
+        #     now_5 = (now - relativedelta(months=+5))
+        #
+        #     # dic = {'patient_id': '患者编号'}
+        #     comment_flag = 0
+        #     better_num = 0
+        #     sum_num = 0
+        #     better_rate = 0
+        #
+        #     patient_id_flag = -1
+        #     patient_id_data = []
+        #
+        #     deleted_name = ["enabled", "deleted", "created_time", "updated_time"]  # 不要的字段
+        #     if sql[-2].find("result") > 0:
+        #         deleted_name.append("comment")
+        #     existed_name = []  # 去重
+        #     location = []  # 记录需要的列
+        #     for i in range(DomainNum):
+        #         if SqlDomain[i][0] == "updated_time":
+        #             date_flag = i
+        #         elif SqlDomain[i][0] not in deleted_name and SqlDomain[i][0] not in existed_name:
+        #             SqlDomainName.append(SqlDomain[i][0])
+        #             # SqlDomainName.append(dic[SqlDomain[i][0]])
+        #             existed_name.append(SqlDomain[i][0])
+        #             location.append(i)
+        #             if SqlDomain[i][0] == "age":
+        #                 age_flag = i
+        #             if SqlDomain[i][0] == "gender":
+        #                 sex_flag = i
+        #             if SqlDomain[i][0] == "comment":
+        #                 comment_flag = i
+        #             if SqlDomain[i][0] == "illness_name":
+        #                 disease_flag = i
+        #             if SqlDomain[i][0] == "treatment_name":
+        #                 treatment_flag = i
+        #             if SqlDomain[i][0] == "patient_id":
+        #                 patient_id_flag = i
+        #
+        #     gain_data = cur.fetchmany(result_num)
+        #     result1 = []
+        #
+        #     for i in range(result_num):
+        #         temp = []
+        #         for j in range(len(gain_data[0])):
+        #             if j in location:  # 获取需要数据
+        #                 temp.append(gain_data[i][j])
+        #             if j == age_flag:  # 判断年龄分布
+        #                 if gain_data[i][j] < 17:
+        #                     age_data[0] += 1
+        #                 elif 17 < gain_data[i][j] < 40:
+        #                     age_data[1] += 1
+        #                 elif 40 < gain_data[i][j] < 65:
+        #                     age_data[2] += 1
+        #                 elif gain_data[i][j] > 65:
+        #                     age_data[3] += 1
+        #             if j == date_flag:  # 病例趋势
+        #                 if gain_data[i][j].__ge__(now_5) and gain_data[i][j].__lt__(now_4):
+        #                     date_data[0] += 1
+        #                 elif gain_data[i][j].__ge__(now_4) and gain_data[i][j].__lt__(now_3):
+        #                     date_data[1] += 1
+        #                 elif gain_data[i][j].__ge__(now_3) and gain_data[i][j].__lt__(now_2):
+        #                     date_data[2] += 1
+        #                 elif gain_data[i][j].__ge__(now_2) and gain_data[i][j].__lt__(now_1):
+        #                     date_data[3] += 1
+        #                 elif gain_data[i][j].__ge__(now_1) and gain_data[i][j].__lt__(now):
+        #                     date_data[4] += 1
+        #                 elif gain_data[i][j].__ge__(now):  # 本月数据
+        #                     date_data[5] += 1
+        #             if j == sex_flag:
+        #                 if gain_data[i][j] == '男':
+        #                     sex_data[0] += 1
+        #                 if gain_data[i][j] == '女':
+        #                     sex_data[1] += 1
+        #             # if j == disease_flag:
+        #             #     disease_name = gain_data[i][j]
+        #             # if j == treatment_flag:
+        #             #     treatment_name = gain_data[i][j]
+        #             # if j == comment_flag:  # 统计好转率
+        #             #     sum_num += 1
+        #             #     if gain_data[i][j] == '好转':
+        #             #         better_num += 1
+        #             if j == patient_id_flag:  # 统计好转率
+        #                 patient_id_data.append(gain_data[i][j])
+        #
+        #         result1.append(temp)
+        #
+        #     disease_thesis = thesis.objects.filter(key_word=disease_name)
+        #     treatment_thesis = thesis.objects.filter(key_word=treatment_name)
+        #
+        #     # if sum_num > 0:
+        #     #     better_rate = better_num / sum_num * 100
+        #     # else:
+        #     #     better_rate = 0
+        #
+        #     # 获取每个症状的治疗手法
+        #     all_treatment_name = []
+        #     all_treatment_data = []
+        #     all_better_data = []
+        #     treatment_sum = 0
+        #
+        #     treatment_warning_flag = 1
+        #
+        #     # 权限判断
+        #     for i in patient_id_data:
+        #         department_result = department.objects.get(patient_id=i)
+        #         if department_result.department_name != doctor.department.Department_name:
+        #             messages.error(request, '没有查询权限')
+        #             context = {'Search_Comment': Search_Comment()}
+        #             return render(request, 'home.html', context)
+        #
+        #     for i in patient_id_data:
+        #         Treatment = treatment.objects.get(patient_id=i)
+        #         tre_result = result.objects.get(patient_id=i)
+        #         add_flag = 1
+        #         for j in range(len(all_treatment_name)):
+        #             if all_treatment_name[j] == Treatment.treatment_name:
+        #                 add_flag = 0
+        #         if add_flag > 0:
+        #             all_treatment_name.append(Treatment.treatment_name)
+        #             all_treatment_data.append(int(1))
+        #             if tre_result.result_comment == "好转":
+        #                 all_better_data.append(int(1))
+        #             else:
+        #                 all_better_data.append(int(0))
+        #         else:
+        #             all_treatment_data[j] = int(all_treatment_data[j]) + 1
+        #             if tre_result.result_comment == "好转":
+        #                 all_better_data[j] = int(all_better_data[j]) + 1
+        #         treatment_sum += 1
+        #
+        #     for j in range(len(all_treatment_name)):
+        #         if all_treatment_name[j] == "纤维结合蛋白":
+        #             treatment_warning_flag = 0
+        #
+        #     better_rate = []
+        #     for i in range(len(all_treatment_data)):
+        #         temp = all_better_data[i]*100 / all_treatment_data[i]
+        #         temp = round(temp, 2)
+        #         better_rate.append(temp)
+        #         all_treatment_data[i] = all_treatment_data[i] * 100 / treatment_sum
+        #         all_treatment_data[i] = round(all_treatment_data[i], 2)
+        #         # all_treatment_data[i] *= 100
+        #         # all_treatment_data[i] = int(all_treatment_data[i])
+        #         # all_treatment_data[i] /= 100.0
+        #
+            # context = {}
+        #     context["location"] = location
+        #     context["result_name"] = SqlDomainName
+        #     context["result"] = result1
+        #     context["sql"] = sql[-2]
+        #     context["result_num"] = result_num
+        #     context['Search_Comment'] = Search_Comment()
+        #     context['better_rate'] = better_rate
+        #
+        #     context['age_data1'] = age_data[0]
+        #     context['age_data2'] = age_data[1]
+        #     context['age_data3'] = age_data[2]
+        #     context['age_data4'] = age_data[3]
+        #
+        #     context['date_data1'] = date_data[0]
+        #     context['date_data2'] = date_data[1]
+        #     context['date_data3'] = date_data[2]
+        #     context['date_data4'] = date_data[3]
+        #     context['date_data5'] = date_data[4]
+        #     context['date_data6'] = date_data[5]
+        #
+        #     context['sex_data1'] = sex_data[0]
+        #     context['sex_data2'] = sex_data[1]
+        #
+        #     context['disease_thesis'] = disease_thesis
+        #     context['treatment_thesis'] = treatment_thesis
+        #     context['question'] = Search_Comment.text
+        #     context['disease_name'] = disease_name  # 如果 = "0" 不需要输出治疗手法与占比
+        #     context['treatment_warning_flag'] = treatment_warning_flag
+        #     context['all_treatment_name'] = all_treatment_name
+        #     context['all_treatment_data'] = all_treatment_data
+        #     context['patient_id_data'] = patient_id_data
             # context['question'] = Search_Comment.text  # 这个地方把注释去了就可以前端显示问题了（理论上
-            return render(request, 'home_result.html', context)
+            # return render(request, 'home_result.html', context)
+
+
+def findResultQFromUrl(request, question):
+    # 这个地方question就是直接可用的问题，
+    # 不需要if xx == ‘post’ 并用question代替search_comment.text即可
+
+    messages.error(request, question)
+    # 返回主页做测试，看看问题是否有传到后台
+    return render(request, 'home.html', context={'Search_Comment': Search_Comment()})
+
+
+
+
+

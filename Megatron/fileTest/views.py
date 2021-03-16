@@ -32,6 +32,14 @@ def fileProofread(df, dic):
     return real_column_index, real_column, columnList
 
 
+def compareStandard(num, floor, upper):
+    if num > upper:
+        return '(高)'
+    if num < floor:
+        return '(低)'
+    return ''
+
+
 def uploadFileInit(request):
     describe_form = describeFrom()
     content = {'describe_form': describe_form, 'form_title': '信息上传', 'page_title': '欢迎'}
@@ -293,7 +301,6 @@ def uploadFileTest_illness(request):
         dic['updated_time'] += ["出院时间", 'updated_time']
         dic['created_time'] += ['入院时间', 'created_time']
 
-
         filename = request.FILES.get('file', '')
         if os.path.exists(settings.UPLOAD_ROOT + "/" + filename.name):
             messages.error(request, '文件已经存在，请不要重复导入！')
@@ -322,9 +329,19 @@ def uploadFileTest_illness(request):
                                             , usecols=real_column_index, names=real_column)
 
                     for i in range(len(df_real)):
+                        blood_sugar_tmp = pd.to_numeric(df_real['blood_sugar'][i])
+                        # blood_pressure_tmp = pd.to_numeric(df_real['blood_pressure'][i])
+                        blood_fat_tmp = pd.to_numeric(df_real['blood_fat'][i])
+
+                        blood_sugar = str(df_real['blood_sugar'][i]) + compareStandard(blood_sugar_tmp, 3.9, 7.8)
+                        blood_fat = str(df_real['blood_fat'][i]) + compareStandard(blood_fat_tmp, 2.8, 5.17)
+
                         tmp = illness.objects.create(illness_id=df_real['illness_id'][i],
                                                      patient_id=df_real['patient_id'][i],
                                                      illness_name=df_real['illness_name'][i],
+                                                     blood_sugar=blood_sugar,
+                                                     blood_pressure=df_real['blood_pressure'][i],
+                                                     blood_fat=blood_fat,
                                                      comment=df_real['comment'][i],
                                                      enabled=df_real['enabled'][i],
                                                      deleted=df_real['deleted'][i],
@@ -364,8 +381,6 @@ def uploadFileTest_treatment(request):
         dic['deleted'] += ['无效', 'deleted']
         dic['enabled'] += ['有效', 'enabled']
 
-
-
         filename = request.FILES.get('file', '')
         if os.path.exists(settings.UPLOAD_ROOT + "/" + filename.name):
             messages.error(request, '文件已经存在，请不要重复导入！')
@@ -395,7 +410,8 @@ def uploadFileTest_treatment(request):
                     for i in range(len(df_real)):
                         tmp = treatment.objects.create(treatment_id=df_real['treatment_id'][i],
                                                        patient_id=df_real['patient_id'][i],
-                                                       treatment_name=df_real['treatment_name'][i], comment=df_real['comment'][i],
+                                                       treatment_name=df_real['treatment_name'][i],
+                                                       comment=df_real['comment'][i],
                                                        enabled=df_real['enabled'][i], deleted=df_real['deleted'][i],
                                                        created_time=df_real['created_time'][i],
                                                        updated_time=df_real['updated_time'][i])

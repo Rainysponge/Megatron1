@@ -127,23 +127,20 @@
                 <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th>热门？</th>
+                        <th>相关问题</th>
 
                       </tr>
-                    </thead>
+                     </thead>
                     <tbody>
-                      <tr>
-                        <td>123</td>
-
-                      </tr>
-                      <tr>
-                        <td>345</td>
-
-                      </tr>
-                      <tr>
-                        <td>567</td>
-
-                      </tr>
+                    {% for item in question_name_list %}
+                        <tr>
+                            <td>
+                                <a id="aForQuestion" href="{% url 'find_result_q_from_url' item %}">
+                                    {{ item }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
 
@@ -168,7 +165,9 @@
     </div>
     <style>
         #search_logo{width:100px; height:40px}
-
+        #aForQuestion{
+            text-decoration: none;
+        }
     </style>
 
     <script>

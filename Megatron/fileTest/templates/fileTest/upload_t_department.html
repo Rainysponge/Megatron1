@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% block title %}信息上传{% endblock %}
+
+{% block styleExpands %}
+    <style>
+        body {
+
+          background-image: url("/media/fileUploadbg.jpeg");
+
+          background-position: center 0;
+
+          background-repeat: no-repeat;
+
+          background-attachment: fixed;
+
+          background-size: cover;
+
+          -webkit-background-size: cover;
+
+          -o-background-size: cover;
+
+          -moz-background-size: cover;
+
+        }
+
+        .form-control {
+            float: right;
+            width: 400px;
+        }
+
+
+
+
+    </style>
+{% endblock %}
+
+
+
+{% block contents %}
+    <br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="col-md-8 mx-auto shadow p-4 bg-white rounded">
+                    <img id="logoInLogin" src="/media/logoGray.png" />
+                    <div style="text-align: center">可在下方添加必要字段的对应名称</div>
+
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        {% for field in t_department_submit_form %}
+                               <div class="input-group">
+                               <lable for="{{ field.id_for_label }}">{{ field.label }}</lable>
+                                  <div class="input-group-prepend">
+                                        <div class="col-md-12">
+                                            {{ field }}
+                                        </div>
+
+                                  </div>
+                               </div>
+                            <p class="text-danger">{{ field.errors.as_text }}</p>
+                        {% endfor %}
+                        <span class="pull-left text-danger">{{ t_department_submit_form.non_field_errors }}</span>
+    {#                    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#myModal">登录</button>#}
+
+
+                            <button type="submit" class="btn btn-info btn-lg btn-block" >添加文件字段别称</button>
+
+
+
+                    </form>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+
+                <div class="list-group">
+                    <a href="{% url 'uploadFile_t_result' %}" class="list-group-item list-group-item-action list-group-item-success">上传t_result数据</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-primary">
+                      <form action="{% url 'uploadFile_department' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+
+                            <input type="file" name="file">
+                            <br>
+                            <input type="submit" value="上传department数据文件" class="btn btn-primary btn-block">
+                        </div>
+                      </form>
+                    </a>
+                    <br>
+
+                    <a href="{% url 'uploadFile_t_patient' %}" class="list-group-item list-group-item-action list-group-item-secondary">
+                        上传patient数据文件
+                    </a>
+                    <a href="{% url 'uploadFile_t_treatment' %}" class="list-group-item list-group-item-action list-group-item-warning">
+                        上传treatment数据文件
+                    </a>
+                    <a href="{% url 'uploadFile_t_illness' %}" class="list-group-item list-group-item-action list-group-item-info">
+                        上传illness数据文件
+                    </a>
+                    <a href="#" id="showTableDic" class="list-group-item list-group-item-action list-group-item-dark" onclick="displayDict()">
+                        显示字段对应关系
+                    </a>
+                  <!--<a href="#" class="list-group-item list-group-item-action list-group-item-primary">
+                      <form action="{% url 'uploadFile_department' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+
+                            <input type="file" name="file">
+                            <br>
+                            <input type="submit" value="上传department数据文件" class="btn btn-primary btn-block">
+                        </div>
+                      </form>
+                  </a>
+                    <br>
+                  <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">
+                      <form action="{% url 'uploadFile_patient' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+
+                            <input type="file" name="file">
+                            <br>
+                            <input type="submit" value="上传patient数据文件" class="btn btn-secondary btn-block">
+                        </div>
+                      </form>
+                  </a>
+                    <br>
+                  <a href="#" class="list-group-item list-group-item-action list-group-item-warning">
+                      <form action="{% url 'uploadFile_treatment' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+
+                            <input type="file" name="file">
+                            <br>
+                            <input type="submit" value="上传treatment数据文件" class="btn btn-warning btn-block">
+                        </div>
+                      </form>
+
+                  </a>
+                    <br>
+                  <a href="#" class="list-group-item list-group-item-action list-group-item-info">
+                      <form action="{% url 'uploadFile_illness' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+
+                            <input type="file" name="file">
+                            <br>
+                            <input type="submit" value="上传illness数据文件" class="btn btn-info btn-block">
+                        </div>
+                      </form>
+                  </a>-->
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+        function displayDict() {
+            var s = "";
+            {% for key, value in dic_format.items %}
+              s += '{{key}}' + ":{{ value|safe }}\n";
+            {% endfor %}
+            alert(s);
+        }
+          {% for msg in messages %}
+              alert('{{ msg.message }}');
+
+          {% endfor %}
+
+
+        </script>
+
+
+
+{% endblock %}

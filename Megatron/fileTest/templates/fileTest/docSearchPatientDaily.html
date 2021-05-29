@@ -1,0 +1,648 @@
+{% extends 'base.html' %}
+{% block title %}搜索{% endblock %}
+{% block styleExpands %}
+<style>
+        body {
+
+          background-image: url("/media/fileUploadbg.jpeg");
+
+          background-position: center 0;
+
+          background-repeat: no-repeat;
+
+          background-attachment: fixed;
+
+          background-size: cover;
+
+          -webkit-background-size: cover;
+
+          -o-background-size: cover;
+
+          -moz-background-size: cover;
+
+        }
+
+
+    </style>
+{% endblock %}
+
+
+{% block contents %}
+    <br><br><br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-2">
+                         <img id="search_logo" src="/media/logo.jpg"/>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <form action="#" method="POST" style="overflow:hidden">
+
+                                {% csrf_token %}
+                                {% for field in Search_Comment %}
+                                    {{ field }}
+                                {% endfor %}
+                                <span class="pull-left text-danger">{{ describe_form.non_field_errors }}</span>
+                                <input type="submit" value="搜索" class="input-group-addon btn btn-primary" style="float:right">
+                                {#<input type="text" class="form-control input-lg"><span class="input-group-addon btn btn-primary">搜索</span>#}
+                            </form>
+
+                        </div>
+                    {% if patientListBool %}
+                        以显示{{ patientUser }}的信息，可能是一下的用户：
+                    {% endif %}
+                    {% for name in patientList %}
+                        {{ name }},
+
+                    {% endfor %}
+                    </div>
+                </div>
+                <div class="HeartRate" id="HeartRate7" style="width: 800px;height:300px;"></div>
+                <div id="StepNumber7" style="width: 800px;height:300px;"></div>
+                <div id="Weight7" style="width: 800px;height:300px;"></div>
+                <div id="SleepTime7" style="width: 800px;height:300px;"></div>
+
+            </div>
+
+            <div class="col-md-3">
+                <div class="list-group">
+                    <button id="btn7" type="button" class="list-group-item-action btn btn-outline-primary active" onclick="display7()">显示7天数据</button>
+                    <button id="btn30" type="button" class="list-group-item-action btn btn-outline-secondary" onclick="display30()">显示30天数据</button>
+                    <button id="btn100" type="button" class="list-group-item-action btn btn-outline-success" onclick="display100()">显示100天数据</button>
+                </div>
+                <br>
+                <div class="list-group">
+                    <a href="{% url 'uploadFile_t_result' %}" class="list-group-item list-group-item-action list-group-item-success">上传t_result数据</a>
+                    <a href="{% url 'uploadFile_t_department' %}" class="list-group-item list-group-item-action list-group-item-primary">上传department数据文件</a>
+                    <a href="{% url 'uploadFile_t_patient' %}" class="list-group-item list-group-item-action list-group-item-secondary">上传patient数据文件</a>
+                    <a href="{% url 'uploadFile_t_treatment' %}" class="list-group-item list-group-item-action list-group-item-warning">上传treatment数据文件</a>
+                    <a href="{% url 'uploadFile_t_illness' %}" class="list-group-item list-group-item-action list-group-item-info">上传illness数据文件</a>
+
+                </div>
+        </div>
+    </div>
+
+
+        <script>
+            console.log('{{ patientUser }}');
+            document.getElementById('id_text').value='{{ patientName }}';
+            if('{{ message }}'){
+                alert('{{ message }}');
+            }
+        </script>
+
+        <script>
+
+        console.log('{{ dataTime7HeartRate }}');
+            console.log('{{ dataTime30SleepTime }}');
+            console.log('{{ dataTime100SleepTime }}');
+            console.log('{{ dateTime7 }}');
+
+
+            var chartDomHeart = document.getElementById('HeartRate7');
+            var myChartHeart = echarts.init(chartDomHeart);
+            var optionHeart;
+
+            optionHeart = {
+                title: {
+                    text: '心率'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: {{ dateTime7|safe }}
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                series: [{
+                    data: {{ dataTime7HeartRate }},
+                    type: 'line',
+                    symbol: 'triangle',
+                    symbolSize: 20,
+                    lineStyle: {
+                        color: '#5470C6',
+                        width: 4,
+                        type: 'dashed'
+                    },
+                    itemStyle: {
+                        borderWidth: 3,
+                        borderColor: '#EE6666',
+                        color: 'yellow'
+                    }
+                }]
+            };
+
+            optionHeart && myChartHeart.setOption(optionHeart);
+
+        </script>
+
+
+
+        <script>
+            var chartDomStepNumber= document.getElementById('StepNumber7');
+            var myChartStepNumber = echarts.init(chartDomStepNumber);
+            var optionStepNumber;
+
+            optionStepNumber = {
+                title: {
+                    text: '步数'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: {{ dateTime7|safe }},
+
+                },
+                yAxis: {
+                    type: 'value'
+                },
+
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                toolbox: {
+                    feature: {
+                        dataView: {show: true, readOnly: false},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                series: [{
+                    data: {{ dataTime7StepNumber }},
+                    type: 'line',
+                    smooth: true
+                }]
+            };
+
+            optionStepNumber && myChartStepNumber.setOption(optionStepNumber);
+        </script>
+
+        <script>
+            var chartDomWeight7= document.getElementById('Weight7');
+            var myChartWeight7 = echarts.init(chartDomWeight7);
+            var optionWeight7;
+
+            optionWeight7 = {
+                title: {
+                    text: '体重'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: {{ dateTime7|safe }}
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross'
+                    },
+                    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                    position: function (pos, params, el, elRect, size) {
+                        var obj = {top: 10};
+                        obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
+                        return obj;
+                    },
+                    extraCssText: 'width: 170px'
+                },
+                series: [{
+                    data: {{ dataTime7Weight }},
+                    type: 'bar',
+                    showBackground: true,
+                    backgroundStyle: {
+                        color: 'rgba(180, 180, 180, 0.2)'
+                    }
+                }],
+
+            };
+
+            optionWeight7 && myChartWeight7.setOption(optionWeight7);
+        </script>
+
+        <script>
+            var chartDomSleepTime7= document.getElementById('SleepTime7');
+            var myChartSleepTime7 = echarts.init(chartDomSleepTime7);
+            var optionSleepTime7;
+
+            optionSleepTime7 = {
+                title: {
+                    text: '睡眠时间'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: {{ dateTime7|safe }}
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '时长(h):',
+                        type: 'line',
+                        step: 'start',
+                        data: {{ dataTime7SleepTime }}
+                    },
+
+                ]
+            };
+
+            optionSleepTime7 && myChartSleepTime7.setOption(optionSleepTime7);
+        </script>
+
+
+        <script>
+    function display30(){
+        document.getElementById("btn7").className = "list-group-item-action btn btn-outline-primary";
+        document.getElementById("btn30").className = "list-group-item-action btn btn-outline-secondary active";
+        document.getElementById("btn100").className = "list-group-item-action btn btn-outline-success";
+        var optionHeart30;
+
+        optionHeart30 = {
+            xAxis: {
+            type: 'category',
+            data: {{ dateTime30|safe }}
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: {{ dataTime30HeartRate }},
+                type: 'line',
+                symbol: 'triangle',
+                symbolSize: 20,
+                lineStyle: {
+                    color: '#5470C6',
+                    width: 4,
+                    type: 'dashed'
+                },
+                itemStyle: {
+                    borderWidth: 3,
+                    borderColor: '#EE6666',
+                    color: 'yellow'
+                }
+            }]
+        };
+        optionHeart && myChartHeart.setOption(optionHeart30);
+        var optionStepNumber30;
+
+        optionStepNumber30 = {
+            title: {
+                text: '步数'
+            },
+            xAxis: {
+                type: 'category',
+                data: {{ dateTime30|safe }},
+
+            },
+            yAxis: {
+                type: 'value'
+            },
+
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
+            },
+            toolbox: {
+                feature: {
+                    dataView: {show: true, readOnly: false},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            series: [{
+                data: {{ dataTime30StepNumber }},
+                type: 'line',
+                smooth: true
+            }]
+        };
+
+        optionStepNumber && myChartStepNumber.setOption(optionStepNumber30);
+        var optionWeight30;
+
+    optionWeight30 = {
+        title: {
+            text: '体重'
+        },
+        xAxis: {
+            type: 'category',
+            data: {{ dateTime30|safe }}
+        },
+        yAxis: {
+            type: 'value'
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross'
+            },
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            position: function (pos, params, el, elRect, size) {
+                var obj = {top: 10};
+                obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
+                return obj;
+            },
+            extraCssText: 'width: 170px'
+        },
+        series: [{
+            data: {{ dataTime30Weight }},
+            type: 'bar',
+            showBackground: true,
+            backgroundStyle: {
+                color: 'rgba(180, 180, 180, 0.2)'
+            }
+        }],
+
+    };
+
+    optionWeight7 && myChartWeight7.setOption(optionWeight30);
+    var optionSleepTime30;
+
+    optionSleepTime30 = {
+        title: {
+            text: '睡眠时间'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            data: {{ dateTime30|safe }}
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: '时长(h):',
+                type: 'line',
+                step: 'start',
+                data: {{ dataTime30SleepTime }}
+            },
+
+        ]
+    };
+
+    optionSleepTime7 && myChartSleepTime7.setOption(optionSleepTime30);
+    }
+</script>
+
+
+        <script>
+            function display100(){
+                document.getElementById("btn7").className = "list-group-item-action btn btn-outline-primary";
+                document.getElementById("btn30").className = "list-group-item-action btn btn-outline-secondary";
+                document.getElementById("btn100").className = "list-group-item-action btn btn-outline-success active";
+                var optionHeart100;
+
+                optionHeart100 = {
+                    xAxis: {
+                    type: 'category',
+                    data: {{ dateTime100|safe }}
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: {{ dataTime100HeartRate }},
+                        type: 'line',
+                        symbol: 'triangle',
+                        symbolSize: 20,
+                        lineStyle: {
+                            color: '#5470C6',
+                            width: 4,
+                            type: 'dashed'
+                        },
+                        itemStyle: {
+                            borderWidth: 3,
+                            borderColor: '#EE6666',
+                            color: 'yellow'
+                        }
+                    }]
+                };
+                optionHeart && myChartHeart.setOption(optionHeart100);
+                var optionStepNumber100;
+
+                optionStepNumber100 = {
+                    title: {
+                        text: '步数'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: {{ dateTime100|safe }},
+
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'cross'
+                        }
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {show: true, readOnly: false},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    series: [{
+                        data: {{ dataTime100StepNumber }},
+                        type: 'line',
+                        smooth: true
+                    }]
+                };
+
+                optionStepNumber && myChartStepNumber.setOption(optionStepNumber100);
+                var optionWeight100;
+                var dataAxis = {{ dateTime100|safe }};
+                var data = {{ dataTime100Weight }};
+                var yMax = 500;
+                var dataShadow = [];
+
+                for (var i = 0; i < data.length; i++) {
+                    dataShadow.push(yMax);
+                }
+
+                optionWeight100 = {
+                    title: {
+                        text: '体重',
+                        subtext: '100天'
+                    },
+                    xAxis: {
+                        data: dataAxis,
+                        axisLabel: {
+                            inside: true,
+                            textStyle: {
+                                color: '#fff'
+                            }
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLine: {
+                            show: false
+                        },
+                        z: 10
+                    },
+                    yAxis: {
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: '#999'
+                            }
+                        }
+                    },
+                    dataZoom: [
+                        {
+                            type: 'inside'
+                        }
+                    ],
+                    series: [
+                        {
+                            type: 'bar',
+                            showBackground: true,
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(
+                                    0, 0, 0, 1,
+                                    [
+                                        {offset: 0, color: '#83bff6'},
+                                        {offset: 0.5, color: '#188df0'},
+                                        {offset: 1, color: '#188df0'}
+                                    ]
+                                )
+                            },
+                            emphasis: {
+                                itemStyle: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#2378f7'},
+                                            {offset: 0.7, color: '#2378f7'},
+                                            {offset: 1, color: '#83bff6'}
+                                        ]
+                                    )
+                                }
+                            },
+                            data: data
+                        }
+                    ]
+                };
+
+                // Enable data zoom when user click bar.
+                var zoomSize = 6;
+                myChartWeight7.on('click', function (params) {
+                    console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+                    myChartWeight7.dispatchAction({
+                        type: 'dataZoom',
+                        startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+                        endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+                    });
+                });
+
+            optionWeight7 && myChartWeight7.setOption(optionWeight100);
+            var optionSleepTime100;
+
+            optionSleepTime100 = {
+                title: {
+                    text: '睡眠时间'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: {{ dateTime100|safe }}
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '时长(h):',
+                        type: 'line',
+                        step: 'start',
+                        data: {{ dataTime100SleepTime }}
+                    },
+
+                ]
+            };
+
+            optionSleepTime7 && myChartSleepTime7.setOption(optionSleepTime100);
+            }
+        </script>
+
+
+        <script>
+            function display7() {
+                document.getElementById("btn7").className = "list-group-item-action btn btn-outline-primary active";
+                document.getElementById("btn30").className = "list-group-item-action btn btn-outline-secondary";
+                document.getElementById("btn100").className = "list-group-item-action btn btn-outline-success";
+                optionHeart && myChartHeart.setOption(optionHeart);
+                optionSleepTime7 && myChartSleepTime7.setOption(optionSleepTime7);
+                optionWeight7 && myChartWeight7.setOption(optionWeight7);
+                optionStepNumber && myChartStepNumber.setOption(optionStepNumber);
+            }
+        </script>
+
+{% endblock %}

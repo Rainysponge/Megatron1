@@ -60,7 +60,7 @@
     {#                    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#myModal">登录</button>#}
 
 
-                            <button type="submit" class="btn btn-info btn-lg btn-block" >提交描述</button>
+{#                            <button type="submit" class="btn btn-info btn-lg btn-block" onclick="showReDict()">提交描述</button>#}
 
 
 
@@ -70,6 +70,17 @@
             </div>
             <div class="col-md-3">
                 <div class="list-group">
+                    <a href="{% url 'uploadFile_t_result' %}" class="list-group-item list-group-item-action list-group-item-success">上传t_result数据</a>
+                    <a href="{% url 'uploadFile_t_department' %}" class="list-group-item list-group-item-action list-group-item-primary">上传department数据文件</a>
+                    <a href="{% url 'uploadFile_t_patient' %}" class="list-group-item list-group-item-action list-group-item-secondary">上传patient数据文件</a>
+                    <a href="{% url 'uploadFile_t_treatment' %}" class="list-group-item list-group-item-action list-group-item-warning">上传treatment数据文件</a>
+                    <a href="{% url 'uploadFile_t_illness' %}" class="list-group-item list-group-item-action list-group-item-info">上传illness数据文件</a>
+
+                </div>
+
+                <img src="/media/ZNSH.jpg" alt="智能手环">
+
+                <!--<div class="list-group">
                   <a href="#" class="list-group-item list-group-item-action list-group-item-success">
                     <form action="{% url 'uploadFile_result' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -130,7 +141,7 @@
                         </div>
                       </form>
                   </a>
-                </div>
+                </div>-->
             </div>
 
 
@@ -232,10 +243,24 @@
 
 
         <script>
+            console.log("{{ columnList|safe }}");
+            console.log("{{ real_column|safe }}");
+            console.log('{{ real_column_index }}');
           {% for msg in messages %}
+              var s = '';
+              var f = '';
+              s += '{{ describeInfo }}' + '\n';
+              {% for key, value in infoDict.items %}
+                f += '{{key}}' + ":{{ value|safe }}\n";
+                  console.log('{{ key }}' + ":{{ value|safe }}");
+              {% endfor %}
+
+              document.getElementById('id_describeText').value=s;
+              document.getElementById('id_describeFormat').value=f;
               alert('{{ msg.message }}');
-              window.location.replace("{% url 'uploadFile' %}");
+              {#window.location.replace("{% url 'uploadFile' %}");#}
           {% endfor %}
+
         </script>
 
 

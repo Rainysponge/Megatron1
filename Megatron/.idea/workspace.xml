@@ -2,25 +2,59 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9334c845-0667-484c-8954-5690126c4fe1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/t/migrations/0007_auto_20210316_2142.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/t_result.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/migrations/0002_t_result_format.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/migrations/0003_auto_20210319_2055.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/migrations/0004_patient_information.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/migrations/0005_auto_20210527_2202.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/migrations/0006_auto_20210527_2205.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/migrations/0007_auto_20210528_1446.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/migrations/0008_auto_20210529_1534.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/templates/fileTest/docSearchPatientDaily.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/templates/fileTest/patientUpdateData.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/templates/fileTest/showPatientData.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/templates/fileTest/upload_t_department.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/templates/fileTest/upload_t_illness.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/templates/fileTest/upload_t_patient.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/templates/fileTest/upload_t_result.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileTest/templates/fileTest/upload_t_treatment.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/ZNSH.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/upload/t_resultDicT.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user/templates/user/patientRegister.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/comment/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Megatron/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Megatron/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/comment/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/comment/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileTest/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/fileTest/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileTest/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/fileTest/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileTest/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/fileTest/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileTest/templates/fileTest/uploadFIleTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/fileTest/templates/fileTest/uploadFIleTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileTest/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/fileTest/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fileTest/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/fileTest/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home_result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home_result.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload/t_department.xls" beforeDir="false" afterPath="$PROJECT_DIR$/upload/t_department.xls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload/t_patient.xls" beforeDir="false" afterPath="$PROJECT_DIR$/upload/t_patient.xls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload/t_result.xls" beforeDir="false" afterPath="$PROJECT_DIR$/upload/t_result.xls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../简单的日记(请阅读.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../简单的日记(请阅读.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -59,7 +93,29 @@
       <recent name="F:\METrgon\Megatron1\Megatron\templates" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.希尔">
+    <configuration name="希尔" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Megatron" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/希尔.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Megatron" type="Python.DjangoServer" factoryName="Django server">
       <module name="Megatron" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -83,6 +139,11 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.希尔" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -146,6 +207,37 @@
       <workItem from="1615808371432" duration="3649000" />
       <workItem from="1615896140939" duration="2539000" />
       <workItem from="1615900448930" duration="3024000" />
+      <workItem from="1615978566420" duration="4292000" />
+      <workItem from="1616137317296" duration="1985000" />
+      <workItem from="1616155062061" duration="9268000" />
+      <workItem from="1616204805325" duration="5611000" />
+      <workItem from="1616224307477" duration="3307000" />
+      <workItem from="1616236571812" duration="612000" />
+      <workItem from="1616242060194" duration="5334000" />
+      <workItem from="1616247525665" duration="554000" />
+      <workItem from="1616410554430" duration="1663000" />
+      <workItem from="1616412315203" duration="655000" />
+      <workItem from="1616416609583" duration="2388000" />
+      <workItem from="1616491842546" duration="1357000" />
+      <workItem from="1616509527117" duration="731000" />
+      <workItem from="1616510411299" duration="651000" />
+      <workItem from="1616592134620" duration="271000" />
+      <workItem from="1616595723836" duration="820000" />
+      <workItem from="1616634262989" duration="2413000" />
+      <workItem from="1616638536041" duration="9000" />
+      <workItem from="1616638588644" duration="599000" />
+      <workItem from="1616652572259" duration="1529000" />
+      <workItem from="1616811070679" duration="74000" />
+      <workItem from="1618385314827" duration="36000" />
+      <workItem from="1618641247569" duration="24000" />
+      <workItem from="1621947144305" duration="28000" />
+      <workItem from="1621951908710" duration="2180000" />
+      <workItem from="1622114052673" duration="4380000" />
+      <workItem from="1622121421448" duration="4175000" />
+      <workItem from="1622183043045" duration="5547000" />
+      <workItem from="1622254543957" duration="5302000" />
+      <workItem from="1622271999250" duration="2250000" />
+      <workItem from="1622274440544" duration="69000" />
     </task>
     <servers />
   </component>
@@ -160,33 +252,38 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1615509096392" />
-    <state x="505" y="116" key="FileChooserDialogImpl" timestamp="1615207688790">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1618641259825">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1614944345953" />
+    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1618641259825" />
     <state x="505" y="116" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1615207688790" />
-    <state x="142" y="0" key="SettingsEditor" timestamp="1611901483829">
+    <state width="1237" height="211" key="GridCell.Tab.0.bottom" timestamp="1616638534159">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1611901483829" />
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1615900449061">
+    <state width="1237" height="211" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1616638534159" />
+    <state width="1237" height="211" key="GridCell.Tab.0.center" timestamp="1616638534159">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1615900449061" />
+    <state width="1237" height="211" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1616638534159" />
+    <state width="1237" height="211" key="GridCell.Tab.0.left" timestamp="1616638534159">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="211" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1616638534159" />
+    <state width="1237" height="211" key="GridCell.Tab.0.right" timestamp="1616638534159">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="211" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1616638534159" />
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1622274440901">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1622274440901" />
     <state x="390" y="200" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1615272360960" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1615217124161">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1615217124161" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/comment/views.py</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Megatron$.coverage" NAME="希尔 Coverage Results" MODIFIED="1616635219207" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

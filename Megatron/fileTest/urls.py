@@ -10,6 +10,15 @@ urlpatterns = [
     path('uploadFile_treatment/', views.uploadFileTest_treatment, name='uploadFile_treatment'),
     path('uploadFile_department/', views.uploadFileTest_department, name='uploadFile_department'),
     path('describe/', views.describeFunc, name='describe'),
+    path('uploadFile_t_result_format/', views.tResultSubmit, name='uploadFile_t_result'),
+    path('uploadFile_t_department_format/', views.tDepartmentSubmit, name='uploadFile_t_department'),
+    path('uploadFile_t_patient_format/', views.tPatientSubmit, name='uploadFile_t_patient'),
+    path('uploadFile_t_treatment_format/', views.tTreatmentSubmit, name='uploadFile_t_treatment'),
+    path('uploadFile_t_illness_format/', views.tIllnessSubmit, name='uploadFile_t_illness'),
+    path('patientUpdateData/', views.patientUpdateData, name='patientUpdateData'),
+    path('showPatientData/', views.showPatientData, name='showPatientData'),
+    path('docSearchPatientDaily/', views.docSearchPatientDaily, name='docSearchPatientDaily'),
+
 ]
 
 

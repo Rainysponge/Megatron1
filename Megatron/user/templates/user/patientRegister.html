@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}{{ form_title }}{% endblock %}
+{% block styleExpands %}
+    <style>
+        body {
+          background-image: url("/media/bg4.jpg");
+          background-position: center 0;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+          -webkit-background-size: cover;
+          -o-background-size: cover;
+          -moz-background-size: cover;
+        }
+    </style>
+{% endblock %}
+
+{% block contents %}
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mx-auto shadow p-3 bg-white rounded">
+                <img id="logoInDocRegister" src="/media/logo.jpg" />
+                <br><!--这里图片自动会贴合这个div的大小，不需要再加上CSS来调节大小-->
+                <form action="{% url 'patientRegister' %}" method="POST">
+                    {% csrf_token %}
+                    {% for field in reg_form %}
+                        <lable for="{{ field.id_for_label }}">{{ field.label }}</lable>
+
+                            {{ field }}
+
+                        <p class="text-danger">{{ field.errors.as_text }}</p>
+                    {% endfor %}
+                    <span class="pull-left text-danger">{{ reg_form.non_field_errors }}</span>
+                    <button id="submit" type="submit" class="btn btn-info btn-lg btn-block">注册</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+     <script>
+        var submit = new Vue({
+          el: '#submit',
+          data: {
+            message: '注意信息的正确性哦~\n ' + new Date().toLocaleString()
+          }
+        })
+    </script>
+
+
+
+{% endblock contents %}
+
+<!-- 如果内容没有放在block里面，该内容无效 -->

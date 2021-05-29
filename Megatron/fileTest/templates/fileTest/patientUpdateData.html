@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}信息上传{% endblock %}
+
+{% block styleExpands %}
+    <style>
+        body {
+
+          background-image: url("/media/fileUploadbg.jpeg");
+
+          background-position: center 0;
+
+          background-repeat: no-repeat;
+
+          background-attachment: fixed;
+
+          background-size: cover;
+
+          -webkit-background-size: cover;
+
+          -o-background-size: cover;
+
+          -moz-background-size: cover;
+
+        }
+
+
+
+
+
+    </style>
+{% endblock %}
+
+
+
+{% block contents %}
+    <br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="col-md-8 mx-auto shadow p-4 bg-white rounded">
+                    <img id="logoInLogin" src="/media/logoGray.png" />
+                    <br>
+                    <form action="{% url 'patientUpdateData' %}" method="POST">
+                        {% csrf_token %}
+                        {% for field in form %}
+                               <div class="input-group">
+                               <lable for="{{ field.id_for_label }}">{{ field.label }}</lable>
+                                  <div class="input-group-prepend">
+                                        <div class="col-md-12" style="float: right;width: 500px;">
+                                            {{ field }}
+                                        </div>
+                                  </div>
+                               </div>
+                            <p class="text-danger">{{ field.errors.as_text }}</p>
+                        {% endfor %}
+                        <span class="pull-left text-danger">{{ describe_form.non_field_errors }}</span>
+    {#                    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#myModal">登录</button>#}
+
+
+                            <button type="submit" class="btn btn-info btn-lg btn-block">提交信息</button>
+
+
+
+                    </form>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="{% url 'showPatientData' %}" class="list-group-item list-group-item-action list-group-item-success">查看每日信息</a>
+
+                </div>
+
+                <img src="/media/ZNSH.jpg" alt="智能手环">
+
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

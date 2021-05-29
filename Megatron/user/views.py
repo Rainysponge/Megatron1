@@ -3,7 +3,7 @@ from django.contrib import auth, messages
 from django.urls import reverse
 from django.contrib.auth.models import User
 from comment.forms import Search_Comment
-from .forms import LoginFrom, RegForm, docRegForm, changeDocInfoForm
+from .forms import LoginFrom, RegForm, docRegForm, changeDocInfoForm, patientRegForm
 from .models import Profile, Doctor, Patient, Department
 
 
@@ -17,7 +17,14 @@ def login(request):
             user = login_form.cleaned_data['user']
             auth.login(request, user)
             messages.error(request, '登陆成功！')
-            context = {'log_massage': '登陆成功!',
+            if user.profile.is_doc:
+                s = user.profile.real_name + '医生您好！'
+            else:
+                if user.profile.sex == '女':
+                    s = user.profile.real_name + '女士您好！'
+                else:
+                    s = user.profile.real_name + '先生您好！'
+            context = {'log_massage': s,
                        'Search_Comment': Search_Comment()}
             # return redirect(request.GET.get('from', reverse('home')))
             return render(request, 'home.html', context)
@@ -135,3 +142,35 @@ def changeDocInfo(request):
     context['form_title'] = '更改部门'
 
     return render(request, 'user/changeDocInfo.html', context)
+
+
+def patientRegister(request):
+    if request.method == 'POST':
+        reg_form = patientRegForm(request.POST)
+        if reg_form.is_valid():
+            username = reg_form.cleaned_data['username']
+            password = reg_form.cleaned_data['password']
+            email = reg_form.cleaned_data['email']
+
+            user = User.objects.create_user(username, email, password)  # 创建用户
+            real_name = reg_form.cleaned_data['real_name']
+            sex = reg_form.cleaned_data['sex']
+
+            user.save()
+            profile = Profile.objects.create(user=user, sex=sex,
+                                             real_name=real_name, is_patient=True)
+            patient = Patient.objects.create(user=user)
+
+            patient.save()
+            profile.save()
+            user = auth.authenticate(username=username, password=password)
+            auth.login(request, user)
+            return render(request, 'home.html', {'massage': '恭喜你已经成功注册啦，赶紧试试吧！',
+                                                 'Search_Comment': Search_Comment()})
+    else:
+        reg_form = patientRegForm()
+
+    context = {}
+    context['reg_form'] = reg_form
+    context['form_title'] = '医生身份注册'
+    return render(request, 'user/patientRegister.html', context)
